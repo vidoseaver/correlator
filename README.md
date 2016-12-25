@@ -1,24 +1,46 @@
-# README
+# rails_template
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The purpose of this repo is to provide the setup I generally needs when starting a new rails project
 
-Things you may want to cover:
+Here's what it has:
 
-* Ruby version
+Pry - because obvi,
+Postgres - database,
+Rspec - testing suite,
+Simplecov -  test coverage
+Factory girl - generating object(and database cleaner),
+Faker - populating the database,
+Figaro - hiding your secrets 
+VCR & Webmock -  mocking your api calls
 
-* System dependencies
+Pretty much everything is already set up.
 
-* Configuration
+Here is how to use it.
 
-* Database creation
+First, clone the repo via your command line my_new_app_name is whatever you want to call your project
 
-* Database initialization
+``` 
+git clone git@github.com:vidoseaver/rails_template.git my_new_app_name
+```
+Next cd, into the folder.
 
-* How to run the test suite
+```
+cd my_new_app_name
 
-* Services (job queues, cache servers, search engines, etc.)
+```
 
-* Deployment instructions
+Now remove the origin and bundle
 
-* ...
+```
+git remote rm origin
+bundle
+```
+
+If you want to user figaro to hide your secrets your going to have to
+
+```
+bundle exec figaro install
+```
+
+Voi la! You're good to go!
+
