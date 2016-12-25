@@ -2,16 +2,16 @@
 
 The purpose of this repo is to provide the setup I generally needs when starting a new rails project
 
-Here's what it has:
+### Here's what it has:
 
-Pry - because obvi,
-Postgres - database,
-Rspec - testing suite,
-Simplecov -  test coverage
-Factory girl - generating object(and database cleaner),
-Faker - populating the database,
-Figaro - hiding your secrets 
-VCR & Webmock -  mocking your api calls
+* Pry - because obvi,
+* Postgres - database,
+* Rspec - testing suite,
+* Simplecov -  test coverage
+* Factory girl - generating object(and database cleaner),
+* Faker - populating the database,
+* Figaro - hiding your secrets 
+* VCR & Webmock -  mocking your api calls
 
 Pretty much everything is already set up.
 
