@@ -1,10 +1,5 @@
-
 source 'https://rubygems.org'
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
@@ -47,9 +42,10 @@ gem 'faker'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem 'pry' #duh
-  gem 'launchy' #because restarting the server every time sucks
-
+  gem 'pry'
+  #duh
+  gem 'launchy'
+  #because restarting the server every time sucks
   gem 'rspec-rails'
   #testing suite
   gem 'capybara'
@@ -67,6 +63,7 @@ group :test do
   #for testing our api's - avoid hitting rate limits
   gem 'webmock'
   #used in conjuction with vcr to intercept out web calls
+end
 
   group :development do
     # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
