@@ -1,0 +1,2 @@
+module GoogleVerificationsHelper
+end
