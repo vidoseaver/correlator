@@ -12,4 +12,19 @@ describe "NomadListService" do
       end
     end
   end
+
+  context "#all_cities" do
+    it "returns the specs for all the cities" do
+      VCR.turned_off do
+        WebMock.allow_net_connect!
+      # VCR.use_cassette("all_cities") do
+
+        cities = NomadListService.new.all_cities
+
+        expect(cities.class).to eq(Hash)
+        expect(cities[:ok]).to eq(true)
+        expect(cities[:type]).to eq("cities")
+      end
+    end
+  end
 end
