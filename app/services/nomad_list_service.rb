@@ -13,7 +13,7 @@ class NomadListService
   end
 
   private
-  
+
     attr_reader :base_url
 
     def getter_and_parser(path)
