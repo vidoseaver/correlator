@@ -15,9 +15,7 @@ describe "NomadListService" do
 
   context "#all_cities" do
     it "returns the specs for all the cities" do
-      VCR.turned_off do
-        WebMock.allow_net_connect!
-      # VCR.use_cassette("all_cities") do
+      VCR.use_cassette("all_cities") do
 
         cities = NomadListService.new.all_cities
 
