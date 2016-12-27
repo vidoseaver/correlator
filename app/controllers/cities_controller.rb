@@ -5,9 +5,12 @@ class CitiesController < ApplicationController
   end
 
   def show
-    @city = City.find()
+    @city = City.find(city_id)
   end
 
   private
-    params.permit(:id)
+    def city_id
+      params["id"].to_i
+    end
+
 end
