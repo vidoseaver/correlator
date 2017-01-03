@@ -33,7 +33,7 @@ gem 'rb-readline'
 #make pry work
 gem 'figaro'
 #hide your stuff
-gem 'serializer'
+gem 'active_model_serializers', '~> 0.10.0'
 #api serializers
 gem 'faraday'
 #for http requests
