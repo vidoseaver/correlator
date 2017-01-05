@@ -6,6 +6,10 @@ body {
   background: #fcfcfa;
 }
 
+h1 {
+  color: turquoise;
+}
+
 .stroke {
   fill: none;
   stroke: #000;

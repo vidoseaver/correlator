@@ -1,7 +1,7 @@
     var width = 950,
-      height = 700;
+        height = 700;
 
-    var colors = { clickable: 'darkgrey', hover: 'grey', clicked: "red", clickhover: "darkred" };
+    var colors = { clickable: 'black', hover: 'darkgrey', clicked: "orange", clickhover: "darkorange" };
 
     var projection = d3.geoOrthographic()
       .scale(300)
@@ -37,47 +37,15 @@
       .attr("class", "graticule")
       .attr("d", path);
 
-    // var world110m = {};
-    // var tsv_fullData = {};
-
     $.ajax({
       method: 'GET',
       url: '/world_data',
       async: true,
       dataType: 'json',
       success: function(world_data) {
-        // world110m = world_data;
-        // console.log(world_data)
         ready(world_data[0], world_data[1])
       }
-    })//.then(console.log("json", world110m))
-    // $.ajax({
-    //   method: 'GET',
-    //   async: true,
-    //   url: 'http://localhost:3000/tsv_data',
-    //   success: function(tsv_data) {
-    //     // tsv_fullData = tsv_data;
-    //     ready(world_data, tsv_data)
-    //     console.log('test')
-    //   }
-    // })
-    // //.then(function() {
-    //     .then(console.log("tsv", tsv_fullData))
-      // console.log("tsv", tsv_fullData)
-    // })
-    // console.log("json", world110m)
-    // d3.json("world-110m.json", function(data) {
-    //   console.log('json', data);
-    // });
-    //
-    // d3.tsv("world-country-names.tsv", function(data) {
-    //   console.log('tsv', data);
-    // });
-
-    // d3.tsv("./world-country-names.tsv", function(data) {
-    //   console.log("d3 tsv reader", data[0]);
-    // });
-
+    })
 
     // d3.queue()
     //   .defer(d3.json, "world-110m.json")
@@ -99,7 +67,7 @@
         console.log('1', countries)
       countries = countries.filter(function(d) {
         return names.some(function(n) {
-          debugger;
+          // debugger;
           if (d.id == n.id) return d.name = n.name;
         });
       }).sort(function(a, b) {

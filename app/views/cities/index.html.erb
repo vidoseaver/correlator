@@ -2,25 +2,19 @@
 <html>
   <head>
     <meta charset="utf-8">
-
+    <script src="//d3js.org/topojson.v1.min.js"></script>
   </head>
 
   <header>
     <h1>Cities#index</h1>
+    <p>Find me in app/views/cities/index.html.erb</p>
   </header>
 
   <body>
-
-  <script src="//d3js.org/topojson.v1.min.js"></script>
-  <script src="//d3js.org/queue.v1.min.js"></script>
-
-    <p>Find me in app/views/cities/index.html.erb</p>
-    <h2>Hi</h2>
-
     <%= javascript_tag do %>
     <% end %>
 
+    <%= javascript_include_tag 'clickable_globe.js' %>
+    <%= stylesheet_link_tag 'clickable_globe' %>
   </body>
-  <%= javascript_include_tag 'clickable_globe.js' %>
-  <%= stylesheet_link_tag 'clickable_globe' %>
 </html>
