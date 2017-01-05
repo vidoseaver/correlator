@@ -6,7 +6,7 @@ class CitiesController < ApplicationController
 
   def world_data
     # require "pry"; binding.pry
-    render :json => @@world_data
+    render :json => [@@world_data, @@tsv_data]
   end
   #
   def tsv_data
