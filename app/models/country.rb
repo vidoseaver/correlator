@@ -9,7 +9,7 @@ class Country < ApplicationRecord
   def self.update_or_create_by_name(json)
 
     name = (defined? json[:Government][:"Country name"][:"conventional short form"][:text]) ? json[:Government][:"Country name"][:"conventional short form"][:text] : "No Data"
-    background = (defined? json[:Introduction][:Background]) ? json[:Introduction][:Background] : "No Data"
+    background = (defined? json[:Introduction][:Background][:text]) ? json[:Introduction][:Background][:text] : "No Data"
     coastline = (defined? json[:Geography][:Coastline][:text]) ? json[:Geography][:Coastline][:text] : "No Data"
     climate = (defined? json[:Geography][:Climate][:text]) ? json[:Geography][:Climate][:text] : "No Data"
     natural_resources = (defined? json[:Geography][:"Natural resources"][:text]) ? json[:Geography][:"Natural resources"][:text] : "No Data"
