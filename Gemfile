@@ -41,6 +41,9 @@ gem 'faker'
 # for seed data
 gem 'd3-rails'
 
+gem "slugify"
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
@@ -58,6 +61,9 @@ group :development, :test do
   #so we can tell what's being hit by tests
   gem 'database_cleaner'
   #keep it clean
+
+  gem 'table_print'
+  #pretty print tables
 end
 
 group :test do
