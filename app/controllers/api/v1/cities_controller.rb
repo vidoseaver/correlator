@@ -5,7 +5,8 @@ class Api::V1::CitiesController < ApplicationController
   end
 
   def show
-    render json: City.find_by(city_params)
+    city = City.find(city_params)
+    render json: city
   end
 
   private
@@ -14,7 +15,7 @@ class Api::V1::CitiesController < ApplicationController
     end
 
     def city_params
-      strong_params[:id]
+      strong_params[:id].to_i
     end
 
 
