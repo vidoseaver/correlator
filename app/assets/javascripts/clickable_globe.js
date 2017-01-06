@@ -1,5 +1,7 @@
-    var width = 950,
-        height = 700;
+    var width = 550,
+        height = 550;
+    // var width = 950,
+    //     height = 700;
 
     var colors = { clickable: 'black', hover: 'yellow', clicked: "orange", clickhover: "darkorange" };
 
@@ -24,7 +26,7 @@
 
     var graticule = d3.geoGraticule();
 
-    var map = d3.select("#globe_container").append("svg")
+    var map = d3.select("#globe_nav_container").append("svg")
       .attr("width", width)
       .attr("height", height)
       .attr("class", "map");
@@ -33,14 +35,14 @@
       .datum({type: "Sphere"})
       .attr("id", "sphere")
       .attr("d", path);
+    //
+    // map.append("use")
+    //   .attr("class", "stroke")
+    //   .attr("xlink:href", "#sphere");
 
-    map.append("use")
-      .attr("class", "stroke")
-      .attr("xlink:href", "#sphere");
-
-    map.append("use")
-      .attr("class", "fill")
-      .attr("xlink:href", "#sphere");
+    // map.append("use")
+    //   .attr("class", "fill")
+    //   .attr("xlink:href", "#sphere");
 
     map.append("path")
       .datum(graticule)

@@ -2,15 +2,49 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/*/
 
+header {
+  display: flex;
+  margin: auto;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 body {
   /*background: #212121;*/
   background: url('./nasa-outerspace.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
-#globe_container {
+#globe_nav_container {
+  display: flex;
+  margin: auto;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: center;
+
   /*width: 500px;
   height: 500px;*/
+}
+
+#country_info_container {
+  display: flex;
+  margin: auto;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#city_info_container {
+  display: flex;
+  margin: auto;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /*visibility: hidden;;*/
 }
 
 .fill {
@@ -21,6 +55,14 @@ body {
 .stroke {
   /*width = 950,
   height = 700;*/
+}
+
+.map {
+  /*float: left;*/
+}
+
+#sphere {
+  /*display: block;*/
 }
 
 h1 {
