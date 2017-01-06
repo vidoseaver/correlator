@@ -3,11 +3,32 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/*/
 
 body {
-  background: #fcfcfa;
+  /*background: #212121;*/
+  background: url('./nasa-outerspace.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+#globe_container {
+  /*width: 500px;
+  height: 500px;*/
+}
+
+.fill {
+  /*width = 950,
+  height = 700;*/
+}
+
+.stroke {
+  /*width = 950,
+  height = 700;*/
 }
 
 h1 {
-  color: turquoise;
+  color: yellow;
+}
+
+p {
+  color: #fff;
 }
 
 .stroke {
@@ -17,7 +38,7 @@ h1 {
 }
 
 .fill {
-  fill: #f2f2f2;
+  fill: #c2dbe8;
 }
 
 .graticule {

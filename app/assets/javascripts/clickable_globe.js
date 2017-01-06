@@ -1,10 +1,20 @@
     var width = 950,
         height = 700;
 
-    var colors = { clickable: 'black', hover: 'darkgrey', clicked: "orange", clickhover: "darkorange" };
+    var colors = { clickable: 'black', hover: 'yellow', clicked: "orange", clickhover: "darkorange" };
+
+    // window.addEventListener('resize', resize);
+
+    // d3.select(window)
+    // 	.on("resize", resize);
+    //
+    // function resize() {
+	  //   d3.select("g").attr("transform", "scale(" + $("#globe_container").width()/900 + ")");
+	  //   $("svg").height($("#globe_container").width()*0.618);
+	  // }
 
     var projection = d3.geoOrthographic()
-      .scale(300)
+      .scale(250)
       .translate([width / 2, height / 2])
       .clipAngle(90)
       .precision(10);
@@ -14,7 +24,7 @@
 
     var graticule = d3.geoGraticule();
 
-    var map = d3.select("body").append("svg")
+    var map = d3.select("#globe_container").append("svg")
       .attr("width", width)
       .attr("height", height)
       .attr("class", "map");
@@ -64,7 +74,7 @@
         land = topojson.feature(world, world.objects.land),
         countries = topojson.feature(world, world.objects.countries).features,
         borders = topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; });
-        console.log('1', countries)
+        // console.log('1', countries)
       countries = countries.filter(function(d) {
         return names.some(function(n) {
           // debugger;
@@ -74,7 +84,7 @@
         // debugger;
         return a.name.localeCompare(b.name);
       });
-      console.log('2', countries)
+      // console.log('2', countries)
 
       map.insert("path", ".graticule")
         .datum(topojson.feature(world, world.objects.land))
