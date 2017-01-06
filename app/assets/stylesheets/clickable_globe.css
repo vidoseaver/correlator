@@ -47,6 +47,14 @@ body {
   /*visibility: hidden;;*/
 }
 
+#donut-chart, #bar-chart, #bubble-chart {
+  display: flex;
+  margin: auto;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: center;
+}
+
 .fill {
   /*width = 950,
   height = 700;*/
