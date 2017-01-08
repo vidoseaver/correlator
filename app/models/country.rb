@@ -34,7 +34,7 @@ class Country < ApplicationRecord
 
 
 
-    Country.find_by(name: name).update_attributes!(
+    Country.find_or_create_by(name: name).update_attributes!(
     url: "/country/#{name.slugify.gsub("--", "-")}",
     slug: name.slugify.gsub("--", "-"),
     background: background,
@@ -62,4 +62,6 @@ class Country < ApplicationRecord
 
     puts "#{name.slugify.gsub("--", "-")} updated"
   end
+
+  
 end
