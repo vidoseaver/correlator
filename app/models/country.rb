@@ -40,7 +40,7 @@ class Country < ApplicationRecord
     background: background,
     coastline: coastline,
     climate: climate,
-    natural_resources: natural_resources ,
+    natural_resources: natural_resources,
     environment: environment,
     ethnic_breakdown: ethnic_breakdown,
     population: population,

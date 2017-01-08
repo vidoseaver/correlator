@@ -6,16 +6,16 @@ class City < ApplicationRecord
   def self.populate_cities
     all_cities = NomadListService.new.all_cities[:result]
     all_cities.map do |city|
-      country_attributes = city[:info][:country]
-      info = city[:info][:city]
-      scores = city[:scores]
-      costs = city[:cost]
-      country = Country.better_find_or_create_by(country_attributes)
+      attributes =  NomadListService.new.city_by_name(city)
+      binding.pry
+      country_attributes = {name: attributes[:endpoint_examples][4].split("/").last.capitalize}
+      info               = attributes[:info][:city]
+      scores             = attributes[:scores]
+      costs              = attributes[:cost]
+      country            = Country.better_find_or_create_by(country_attributes)
       City.create_with(
         country_id:                        country.id,
         name:                              info[:name],
-        url:                               info[:url],
-        slug:                              info[:slug],
         nomad_score:                       scores[:nomad_score],
         life_score:                        scores[:life_score],
         free_wifi_available:               scores[:free_wifi_available],
