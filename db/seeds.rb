@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Dir.glob("country_factbook/**/*.json") do |file_name|
+  json = ActiveSupport::JSON.decode(File.read(file_name))
+end
