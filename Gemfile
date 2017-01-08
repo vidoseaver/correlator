@@ -40,7 +40,10 @@ gem 'faraday'
 gem 'faker'
 # for seed data
 gem 'd3-rails'
-
+#for data visualization
+gem 'requirejs-rails', '~> 0.9.5'
+gem 'sprockets', '>=3.0.0.beta'
+gem 'sprockets-es6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
