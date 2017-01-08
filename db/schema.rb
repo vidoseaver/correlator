@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170108185846) do
+ActiveRecord::Schema.define(version: 20170108220918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20170108185846) do
     t.string   "exports"
     t.string   "coastline"
     t.string   "ethnic_breakdown"
+    t.integer  "d3_id"
   end
 
   add_foreign_key "cities", "countries"

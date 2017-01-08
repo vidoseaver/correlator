@@ -62,6 +62,4 @@ class Country < ApplicationRecord
 
     puts "#{name.slugify.gsub("--", "-")} updated"
   end
-
-  
 end
