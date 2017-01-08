@@ -31,6 +31,9 @@ var map = d3.select("#globe_nav_container").append("svg")
   .attr("height", height)
   .attr("class", "map");
 
+var tooltip = d3.select('#globe_nav_container').append('div')
+  .attr('class', 'hidden tooltip');
+
 map.append("defs").append("path")
   .datum({type: "Sphere"})
   .attr("id", "sphere")
@@ -148,7 +151,7 @@ function ready(world, names) {
               });
             })();
           })
-          .on("mousemove", function() {
+          .on("mousemove", function(d) {
             // debugger
             var c = d3.select(this);
             if (c.classed("clicked")) {
@@ -156,6 +159,15 @@ function ready(world, names) {
             } else {
               c.attr("fill", colors.hover);
             }
+
+            // debugger;
+            var mouse = d3.mouse(map.node()).map(function(d) {
+              return parseInt(d);
+            });
+            tooltip.classed('hidden', false)
+              .attr('style', 'left:' + (mouse[0] + 15) +
+                'px; top:' + (mouse[1] - 35) + 'px')
+              .html(d.name);
           })
           .on("mouseout", function() {
             var c = d3.select(this);
