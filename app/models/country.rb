@@ -60,7 +60,32 @@ class Country < ApplicationRecord
       unemployment_rate: unemployment_rate,
       population_below_poverty_line: population_below_poverty_line,
       exports: exports)
-
+    else
+      Country.create_with(
+      url: "/country/#{name.slugify.gsub("--", "-")}",
+      slug: name.slugify.gsub("--", "-"),
+      background: background,
+      coastline: coastline,
+      climate: climate,
+      natural_resources: natural_resources,
+      environment: environment,
+      ethnic_breakdown: ethnic_breakdown,
+      population: population,
+      languages: languages,
+      religions: religions,
+      age_structure: age_structure,
+      median_age: median_age,
+      net_migration_rate: net_migration_rate,
+      urbanization: urbanization,
+      sex_ratio: sex_ratio,
+      capital: capital,
+      dual_citizentship: dual_citizentship ,
+      residency_requirement: residency_requirement,
+      government_type: government_type,
+      gdp_per_capita: gdp_per_capita,
+      unemployment_rate: unemployment_rate,
+      population_below_poverty_line: population_below_poverty_line,
+      exports: exports).find_or_create_by(name: name)
     end
 
     puts "#{name.slugify.gsub("--", "-")} updated"
