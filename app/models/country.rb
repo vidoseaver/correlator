@@ -35,7 +35,7 @@ class Country < ApplicationRecord
 
 
 
-    Country.create.with(
+    Country.create_with(
     url: "/country/#{name.slugify.gsub("--", "-")}",
     slug: name.slugify.gsub("--", "-"),
     background: background,
