@@ -7,7 +7,6 @@ class City < ApplicationRecord
     all_cities = NomadListService.new.all_cities[:result]
     all_cities.map do |city|
       attributes =  NomadListService.new.city_by_name(city)
-      binding.pry
       country_attributes = {name: attributes[:endpoint_examples][4].split("/").last.capitalize}
       info               = attributes[:info][:city]
       scores             = attributes[:scores]
