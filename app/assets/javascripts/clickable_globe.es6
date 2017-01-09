@@ -1,3 +1,11 @@
+// var margin = {top: 10, left: 10, bottom: 10, right: 10},
+var margin = 10,
+    width = parseInt(d3.select('#globe_nav_container').style('width')),
+    width = width - margin - margin,
+    mapRatio = .5,
+    height = width * mapRatio;
+
+//
 var width = 400,
     height = 400;
 // var width = 950,
@@ -16,7 +24,8 @@ var colors = { clickable: "black", hover: "tomato", clicked: "orange", clickhove
 // }
 
 var projection = d3.geoOrthographic()
-  .scale(175)
+  .scale(width / 2)
+  // .scale(175)
   .translate([width / 2, height / 2])
   .clipAngle(90)
   .precision(10);
@@ -26,70 +35,12 @@ var path = d3.geoPath()
 
 var graticule = d3.geoGraticule();
 
-//
-// function zoomed() {
-//   map.attr(
-//     "transform",
-//     "translate(" + zoom.translate() + ")" +
-//     "scale(" + zoom.scale() + ")"
-//   );
-// }
-// //
-// function interpolateZoom (translate, scale) {
-//     var self = this;
-//     // console.log(this);
-//     return d3.transition().duration(350).tween("zoom", function () {
-//         var iTranslate = d3.interpolate(zoom.translate(), translate),
-//             iScale = d3.interpolate(zoom.scale(), scale);
-//         return function (t) {
-//             zoom
-//                 .scale(iScale(t))
-//                 .translate(iTranslate(t));
-//             zoomed();
-//         };
-//     });
-// }
-// //
-// function zoomClick() {
-//     var clicked = d3.event.target,
-//         direction = 1,
-//         factor = 0.2,
-//         target_zoom = 1,
-//         center = [width / 2, height / 2],
-//         extent = zoom.scaleExtent(),
-//         translate = zoom.transform(),
-//         translate0 = [],
-//         l = [],
-//         view = {x: translate[0], y: translate[1], k: zoom.scale()};
-//
-//     d3.event.preventDefault();
-//     direction = (this.id === 'zoom_in') ? 1 : -1;
-//     target_zoom = zoom.scale() * (1 + factor * direction);
-//
-//     if (target_zoom < extent[0] || target_zoom > extent[1]) { return false; }
-//
-//     translate0 = [(center[0] - view.x) / view.k, (center[1] - view.y) / view.k];
-//     view.k = target_zoom;
-//     l = [translate0[0] * view.k + view.x, translate0[1] * view.k + view.y];
-//
-//     view.x += center[0] - l[0];
-//     view.y += center[1] - l[1];
-//
-//     interpolateZoom([view.x, view.y], view.k);
-// }
-//
-// d3.selectAll('button').on('click', zoomClick);
-//
-// var zoom = d3.zoom().scaleExtent([1, 8]).on("zoom", zoomed);
-// // var zoom = d3.behavior.zoom().on("zoom", function() {
-// //   map.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")")
-// // });
-
 var map = d3.select("#globe_nav_container")
   .append("svg")
   .attr("width", width)
   .attr("height", height)
   .attr("class", "map");
+
   // .append("g")
   //   .call(d3.zoom().on("zoom", function() {
   //     map.attr(zoom)
@@ -100,24 +51,52 @@ var tooltip = d3.select("#globe_nav_container")
   .append("div")
   .attr("class", "hidden tooltip");
 
+// var g = map.append("g");
+
 map.append("defs")
   .append("path")
   .datum({type: "Sphere"})
   .attr("id", "sphere")
   .attr("d", path);
-//
+
+//APPENDS OUTER GLOBE BORDER
 // map.append("use")
 //   .attr("class", "stroke")
 //   .attr("xlink:href", "#sphere");
 
+//APPENDS COLORING (OUTER-COUNTRY FILL)
 // map.append("use")
 //   .attr("class", "fill")
 //   .attr("xlink:href", "#sphere");
 
+// APPENDS GRIDLINES
 map.append("path")
   .datum(graticule)
   .attr("class", "graticule")
   .attr("d", path);
+
+d3.select(window).on('resize', resizeGlobe);
+
+function resizeGlobe() {
+    // adjust things when the window size changes
+    width = parseInt(d3.select('#globe_nav_container').style('width'));
+    width = width - margin.left - margin.right;
+    height = width * mapRatio;
+
+    // update projection
+    projection
+      .translate([width / 2, height / 2])
+      .scale(width);
+
+    // resize the map container
+    map
+      .style('width', width + 'px')
+      .style('height', height + 'px');
+
+    // resize the map
+    map.select('.land').attr('d', path);
+    map.selectAll('.state').attr('d', path);
+}
 
 $.ajax({
   method: "GET",
@@ -174,7 +153,9 @@ function ready(world, names) {
             .attr("fill", colors.clickable)
             .attr("d", path)
             .attr("class", "clickable")
-            .attr("data-country-id", names[j].id)
+            .attr("data-country-id", j)
+            .attr("database-id", names[j].id)
+            // .on("click", zoomCountry)
             .on("click", function() {
               console.log("clicked country", this)
               // ajaxCountryDataCall()
@@ -184,8 +165,8 @@ function ready(world, names) {
               //   `<p>Hello Country<p>`
               // )
 
-              var clickedCountryID = $(this).attr("data-country-id")
-              console.log('url', `http://corre1ator.herokuapp.com/api/v1/countries/${clickedCountryID}`)
+              var clickedCountryID = $(this).attr("database-id")
+              // console.log('url', `http://corre1ator.herokuapp.com/api/v1/countries/${clickedCountryID}`)
               //
               $.ajax({
                 method: "GET",
@@ -217,6 +198,8 @@ function ready(world, names) {
                     projection.rotate(r(t));
                     map.selectAll("path").attr("d", path);
                   }
+
+
                 });
               })();
             })
@@ -250,11 +233,38 @@ function ready(world, names) {
       }
     }
 
+      // function zoomCountry(d) {
+      //   var d, y, k;
+      //
+      //   if (d && centered !== d) {
+      //     var centroid = path.centroid(d);
+      //     x = centroid[0];
+      //     y = centroid[1];
+      //     k = 4;
+      //     centered = d;
+      //   } else {
+      //     x = width / 2;
+      //     y = height / 2;
+      //     k = 1;
+      //     centered = null;
+      //   }
+      //
+      //   map.selectAll("path")
+      //     .classed("active", centered && function(d) { return d === centered; });
+      //
+      //   map.transition()
+      //     .duration(750)
+      //     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," -y + ")")
+      //     .style("stroke-width", 1.5 / k + "px");
+      // }
+
+    // }
+
     function renderCountryData(clickedCountry, clickedCountryID) {
       // console.log('test')
-      console.log(clickedCountry)
+      // console.log(clickedCountry)
       $(".current-country-data").append(`<h1>HELLLLLLOOOOOOOOO</h1>`);
-      if (clickedCountry.id === clickedCountryID) {
+      // if (clickedCountry.id === clickedCountryID) {
         // $(".current-country-data").append(`
         //   <div class="country-facts-countainer">
         //     <h1>clickedCountry.name</h1>
@@ -292,7 +302,7 @@ function ready(world, names) {
         //   </div>
         // `
         // )
-      }
+      // }
     }
 
   map.insert("path", ".graticule")

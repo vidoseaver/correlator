@@ -1,5 +1,6 @@
 # To run any example or example group through Selenium, just set :js => true:
 require "rails_helper"
+require "selenium-webdriver"
 
 describe 'home page' do
   it 'shows title and subtitle when visiting home page', :js => true do
@@ -21,6 +22,125 @@ describe 'home page' do
     page.should have_content('View Country and City Travel Information World-Wide')
   end
 end
+
+# # __________________________
+# site_url = "file://#{File.join(File.dirname(__FILE__), "..", 'site')}"
+# driver.navigate.to(site_url + "/locators.html")
+# __FILE__ is the directory where the test script is
+#
+# driver.get(site_url + "/locators.html");
+# driver.find_element(:id, "submit_btn").click # Button
+# driver.find_element(:id, "cancel_link").click # Link
+# driver.find_element(:id, "username").send_keys("agileway") # Textfield
+# driver.find_element(:id, "alert_div").text # HTML Div element
+#
+# driver.find_element(:class, "btn-primary").click # Submit button
+# driver.find_element(:class, "btn").click # Cancel link
+#
+# <a href="index.html" id="recommend_selenium_link" class="nav" data-id="123" \
+# style="font-size: 14px;">Recommend Selenium</a>
+# Click a link by text
+# driver.get(site_url + "/link.html") # see Chapter 2 for site_url
+# driver.find_element(:link_text, "Recommend Selenium").click
+# Click a link by ID
+# driver.find_element(:id, "recommend_selenium_link").click
+#
+# Getting link data attributes
+# Once a web control is identified, we can get its other attributes of the element. This is
+# generally applicable to most of the controls.
+# expect(driver.find_element(:link_text, "Recommend Selenium")["href"]).to eq(\
+# site_url + "/index.html")
+# expect(driver.find_element(:link_text, "Recommend Selenium")["id"]).to eq("r\
+# ecommend_selenium_link")
+# expect(driver.find_element(:id, "recommend_selenium_link").text).to eq("Reco\
+# mmend Selenium")
+# expect(driver.find_element(:id, "recommend_selenium_link").tag_name).to eq("\
+# a")
+#
+#
+# load File.dirname(__FILE__) + '/../test_helper.rb'
+# describe "Selenium Recipes - Start different browsers" do
+# include TestHelper
+# before(:all) do
+# @driver = Selenium::WebDriver.for(:chrome)
+# end
+# before(:each) do
+# @driver.navigate.to("http://travel.agileway.net")
+# end
+#
+# after(:all) do
+# @driver.quit
+# end
+# it "Invalid Login" do
+# @driver.find_element(:id, "username").send_keys("agileway")
+# @driver.find_element(:id, "password").send_keys("changeme")
+# @driver.find_element(:xpath,"//input[@value='Sign in']").click
+# expect(@driver.page_source).to include("Invalid email or password")
+# end
+# it "Login successfully" do
+# @driver.find_element(:id, "username").send_keys("agileway")
+# @driver.find_element(:id, "password").send_keys("testwise")
+# @driver.find_element(:xpath,"//input[@value='Sign in']").click
+# expect(@driver.page_source).to include("Signed in!")
+# end
+# end
+
+# describe "Selenium Recipes - Start different browsers" do
+# it "Start Chrome" do
+# driver = Selenium::WebDriver.for(:chrome)
+# driver.navigate.to("http://travel.agileway.net")
+# sleep 1
+# driver.quit
+# end
+# end
+
+# driver.title.should == "Selenium Recipes"
+# driver.title.include?("Selenium").should be_truthy
+# driver.title.include?("Selenium").should_not be_falsey
+# driver.title.should_not include("Watir")
+
+
+#
+# driver = Selenium::WebDriver.for :firefox
+# driver.navigate.to "http://www.google.com"
+# element = driver.find_element(:name, 'q')
+# element.send_keys "Hello Selenium WebDriver!"
+# element.submit
+# puts driver.title
+
+
+# __________________________
+
+
+# open
+# opens a page using a URL.
+
+# click/clickAndWait
+# performs a click operation, and optionally waits for a new page to load.
+
+# verifyTitle/assertTitle
+# verifies an expected page title.
+
+# verifyTextPresent
+# verifies expected text is somewhere on the page.
+
+# verifyElementPresent
+# verifies an expected UI element, as defined by its HTML tag, is present on the page.
+
+# verifyText
+# verifies expected text and its corresponding HTML tag are present on the page.
+
+# verifyTable
+# verifies a table’s expected contents.
+
+# waitForPageToLoad
+# pauses execution until an expected new page loads. Called automatically when clickAndWait is used.
+
+# waitForElementPresent
+# pauses execution until an expected UI element, as defined by its HTML tag, is present on the page.
+
+# ________________________________
+
 
 # describe('Landing ToDo Box Page', function(){
 #   browser.url('/')
