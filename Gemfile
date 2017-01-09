@@ -43,7 +43,6 @@ gem 'd3-rails'
 
 gem "slugify"
 
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
@@ -71,6 +70,7 @@ group :test do
   #for testing our api's - avoid hitting rate limits
   gem 'webmock'
   #used in conjuction with vcr to intercept out web calls
+  gem 'selenium-webdriver'
 end
 
   group :development do

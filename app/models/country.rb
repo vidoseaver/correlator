@@ -1,3 +1,4 @@
+require "csv"
 class Country < ApplicationRecord
   has_many :cities
 
@@ -61,5 +62,14 @@ class Country < ApplicationRecord
     exports: exports)
 
     puts "#{name.slugify.gsub("--", "-")} updated"
+  end
+
+  def self.d3_code_assigner
+    path = "app/assets/world-country-names.tsv"
+    parsed_file = CSV.read(path, col_sep: "\t", headers: true, header_converters: :symbol )
+    parsed_file.each do |row|
+      country = Country.find_by(name: row[:name])
+      country.update_attributes(d3_id:row[:id]) if !country.nil?
+    end
   end
 end

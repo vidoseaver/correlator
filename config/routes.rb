@@ -3,6 +3,10 @@ Rails.application.routes.draw do
 
   root to: "cities#index"
 
+  get '/world_data', to: "cities#world_data"
+
+  get '/tsv_data', to: "cities#tsv_data"
+
   resources :cities, only:[:show]
 
   namespace :api do

@@ -1,0 +1,24 @@
+{
+  "name": "correlator",
+  "version": "1.0.0",
+  "description": "The purpose of this repo is to provide the setup I generally needs when starting a new rails project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vidoseaver/correlator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vidoseaver/correlator/issues"
+  },
+  "homepage": "https://github.com/vidoseaver/correlator#readme",
+  "dependencies": {
+    "d3": "^4.4.0",
+    "d3-geo-projection": "^1.2.1",
+    "geo": "0.0.3"
+  }
+}
