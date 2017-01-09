@@ -10,19 +10,28 @@
   </header>
 
   <body>
-    <section class="">
-      <nav id="globe_nav_container"></nav>
-      <article id="city-list"></article>
-    </section>
+    <nav>
+      <button id="zoom-in">+</button>
+      <button id="zoom-out">-</button>
+    </nav>
 
-    <section id="country_info_container">
-      <h2>CountryName</h2>
-      <p>CountryInfo from CIA Factbook</p>
+    <section class="globe-and-data-container">
+      <nav id="globe_nav_container">
+        <article id="city-list"></article>
+      </nav>
+
+      <section id="country_info_container">
+        <h2>CountryInfo Below</h2>
+        <article class="current-country-data"></article>
+      </section>
     </section>
 
     <section id="city_info_container">
       <h2>CityName</h2>
       <p>CityInfo from NomadList</p>
+
+      </div>
+
       <div id="donut-chart"></div>
       <div id="bar-chart"></div>
       <div id="bubble-chart"></div>
