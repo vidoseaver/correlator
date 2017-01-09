@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Dir.glob("app/assets/factbook.json/**/*.json").each do |file_name|
-  
+Dir.glob("app/assets/factbook/**/*.json").each do |file_name|
+
   json = JSON.parse(File.read(file_name), symbolize_names:true)
   Country.update_or_create_by_name(json)
 end
