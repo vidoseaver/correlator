@@ -60,9 +60,9 @@ map.append("defs")
   .attr("d", path);
 
 //APPENDS OUTER GLOBE BORDER
-// map.append("use")
-//   .attr("class", "stroke")
-//   .attr("xlink:href", "#sphere");
+map.append("use")
+  .attr("class", "stroke")
+  .attr("xlink:href", "#sphere");
 
 //APPENDS COLORING (OUTER-COUNTRY FILL)
 // map.append("use")
@@ -153,28 +153,25 @@ function ready(world, names) {
             .attr("fill", colors.clickable)
             .attr("d", path)
             .attr("class", "clickable")
-            .attr("data-country-id", j)
-            .attr("database-id", names[j].id)
+            .attr("world110-country-id", j)
+            .attr("database-id", names[i].id)
             // .on("click", zoomCountry)
             .on("click", function() {
               console.log("clicked country", this)
-              // ajaxCountryDataCall()
     // _______________________
     // Integrate CIA Factbook Data
-              // $(".current-country-CIA-data").append(
-              //   `<p>Hello Country<p>`
-              // )
-
-              var clickedCountryID = $(this).attr("database-id")
-              // console.log('url', `http://corre1ator.herokuapp.com/api/v1/countries/${clickedCountryID}`)
-              //
+              var databaseCountryID = $(this).attr("database-id")
+              $(".current-country-data").text("")
               $.ajax({
                 method: "GET",
-                url: `http://corre1ator.herokuapp.com/api/v1/countries/${clickedCountryID}`,
+                url: `http://corre1ator.herokuapp.com/api/v1/countries/${databaseCountryID}`,
                 async: true,
                 dataType: "json",
                 success: function(clickedCountry) {
-                  renderCountryData(clickedCountry, clickedCountryID)
+                  // debugger;
+                  // console.log('world110CountryID', world110CountryID)
+                  // console.log('clickedCountry', clickedCountry)
+                  renderCountryData(clickedCountry, databaseCountryID)
                   // ready(worldData[0], worldData[1])
                 // error: console.log(error)
                 }
@@ -192,7 +189,7 @@ function ready(world, names) {
                 d3.select(".clicked").transition()
                 .duration(1250)
                 .tween("rotate", function() {
-                  var p = d3.geoCentroid(countries[d3.select(this).attr("data-country-id")]),
+                  var p = d3.geoCentroid(countries[d3.select(this).attr("world110-country-id")]),
                       r = d3.interpolate(projection.rotate(), [-p[0], -p[1]]);
                   return function (t) {
                     projection.rotate(r(t));
@@ -233,76 +230,49 @@ function ready(world, names) {
       }
     }
 
-      // function zoomCountry(d) {
-      //   var d, y, k;
-      //
-      //   if (d && centered !== d) {
-      //     var centroid = path.centroid(d);
-      //     x = centroid[0];
-      //     y = centroid[1];
-      //     k = 4;
-      //     centered = d;
-      //   } else {
-      //     x = width / 2;
-      //     y = height / 2;
-      //     k = 1;
-      //     centered = null;
-      //   }
-      //
-      //   map.selectAll("path")
-      //     .classed("active", centered && function(d) { return d === centered; });
-      //
-      //   map.transition()
-      //     .duration(750)
-      //     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," -y + ")")
-      //     .style("stroke-width", 1.5 / k + "px");
-      // }
+    function renderCountryData(clickedCountry, databaseCountryID) {
+      // console.log('clickedCountry', clickedCountry.d3_id)
+      // console.log('databaseCountryID', databaseCountryID)
+      if (clickedCountry.d3_id == databaseCountryID) {
+        // $(".current-country-data").append(`<h1>HELLLLLLOOOOOOOOO</h1>`);
+        $(".current-country-data").append(`
+          <div class="country-facts-countainer">
+            <h1>${clickedCountry.name}</h1>
+            <h2>Capital: ${clickedCountry.capital}</h2>
+            <h3>Population: ${clickedCountry.population}</h3>
 
-    // }
+            <h3>Government Type: ${clickedCountry.government_type}</h3>
+            <h3>Dual Citizenship: ${clickedCountry.dual_citizenship}</h3>
+            <h3>Residency Requirement: ${clickedCountry.residency_requirement}</h3>
+            <h5>Net Migration Rate: ${clickedCountry.net_migration_rate}</h5>
 
-    function renderCountryData(clickedCountry, clickedCountryID) {
-      // console.log('test')
-      // console.log(clickedCountry)
-      $(".current-country-data").append(`<h1>HELLLLLLOOOOOOOOO</h1>`);
-      // if (clickedCountry.id === clickedCountryID) {
-        // $(".current-country-data").append(`
-        //   <div class="country-facts-countainer">
-        //     <h1>clickedCountry.name</h1>
-        //     <h2>Capital: clickedCountry.capital</h2>
-        //     <h3>Population: clickedCountry.population</h3>
-        //
-        //     <h3>Government Type: clickedCountry.government_type</h3>
-        //     <h3>Dual Citizenship: clickedCountry.dual_citizenship</h3>
-        //     <h3>Residency Requirement: clickedCountry.residency_requirement</h3>
-        //     <h5>Net Migration Rate: clickedCountry.net_migration_rate</h5>
-        //
-        //     <h5>Urbanization: clickedCountry.urbanization</h5>
-        //     <h3>GDP/Capita: clickedCountry.gdp_per_capita</h3>
-        //     <h5>unemployment_rate: clickedCountry.unemployment_rate</h5>
-        //     <h5>Population Below Poverty Line: clickedCountry.population_below_poverty_line</h5>
-        //
-        //     <h5>Age_structure: clickedCountry.Age_structure</h5>
-        //     <h3>Median Age: clickedCountry.median_age</h3>
-        //     <h3>Sex Ratio: clickedCountry.sex_ratio</h3>
-        //     <h3>Languages: clickedCountry.languages</h3>
-        //     <h3>Ethnic Breakdown: clickedCountry.ethnic_breakdown</h3>
-        //     <h3>Religions: clickedCountry.religions</h3>
-        //
-        //     <h5>Climate: clickedCountry.climate</h5>
-        //     <h5>Coastlin: clickedCountry.coastline</h5>
-        //     <h5>Environment: clickedCountry.environment</h5>
-        //     <h5>Natural Resources: clickedCountry.natural_resources</h5>
-        //     <label>
-        //     <h5>Exports: clickedCountry.exports</h5>
-        //     </label>
-        //
-        //     <label>Historical Background:
-        //       <textarea>clickedCountry.background</textarea>
-        //     </label>
-        //   </div>
-        // `
-        // )
-      // }
+            <h5>Urbanization: ${clickedCountry.urbanization}</h5>
+            <h3>GDP/Capita: ${clickedCountry.gdp_per_capita}</h3>
+            <h5>unemployment_rate: ${clickedCountry.unemployment_rate}</h5>
+            <h5>Population Below Poverty Line: ${clickedCountry.population_below_poverty_line}</h5>
+
+            <h5>Age_structure: ${clickedCountry.Age_structure}</h5>
+            <h3>Median Age: ${clickedCountry.median_age}</h3>
+            <h3>Sex Ratio: ${clickedCountry.sex_ratio}</h3>
+            <h3>Languages: ${clickedCountry.languages}</h3>
+            <h3>Ethnic Breakdown: ${clickedCountry.ethnic_breakdown}</h3>
+            <h3>Religions: ${clickedCountry.religions}</h3>
+
+            <h5>Climate: ${clickedCountry.climate}</h5>
+            <h5>Coastlin: ${clickedCountry.coastline}</h5>
+            <h5>Environment: ${clickedCountry.environment}</h5>
+            <h5>Natural Resources: ${clickedCountry.natural_resources}</h5>
+            <label>
+            <h5>Exports: ${clickedCountry.exports}</h5>
+            </label>
+
+            <label>Historical Background:
+              <textarea>${clickedCountry.background}</textarea>
+            </label>
+          </div>
+        `
+        )
+      }
     }
 
   map.insert("path", ".graticule")

@@ -4,7 +4,9 @@ require "selenium-webdriver"
 
 describe 'home page' do
   it 'shows title and subtitle when visiting home page', :js => true do
-    visit root
+    # visit root_path
+    site_url = "localhost:3000/}"
+    driver.navigate.to(site_url + "/locators.html")
     # fill_in 'Author', :with => 'J. Random Hacker'
     # fill_in 'Comment', :with => 'Awesome post!'
     # click_on 'Submit'  # this be an Ajax button -- requires Selenium
@@ -12,12 +14,12 @@ describe 'home page' do
     page.should have_content('View Country and City Travel Information World-Wide')
   end
   it 'has an world-globe svg element upon visiting home page', :js => true do
-    visit root
+    visit root_path
     # page.should have_content('World Data Correlator')
     # page.should have_content('View Country and City Travel Information World-Wide')
   end
   it 'has an world-globe svg element upon visiting home page', :js => true do
-    visit root
+    visit root_path
     page.should have_content('World Data Correlator')
     page.should have_content('View Country and City Travel Information World-Wide')
   end

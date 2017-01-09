@@ -1,58 +1,70 @@
 /*// Place all the styles related to the cities controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/*/
-
-header {
+@mixin containerDisplay {
   display: flex;
-  margin: auto;
   -ms-align-items: center;
   align-items: center;
   justify-content: center;
+}
+
+@font-face {
+  src:
+  	local('BPmono'),
+  	local('BP-mono'),
+  	url('fonts/BPmono/BPmono.ttf')
+  	format('truetype');
+}
+
+header {
+  @include containerDisplay;
+  margin: auto;
   flex-direction: column;
 }
 
 body {
+  font-family: 'BPmono';
   /*background: #212121;*/
-  background: url('./nasa-outerspace.jpg') no-repeat center center fixed;
+  background: url('./cracked-old-paper.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
+.globe-and-data-container {
+  @include containerDisplay;
+  flex-direction: row;
+}
+
 #globe_nav_container {
-  display: flex;
   margin: auto;
-  -ms-align-items: center;
-  align-items: center;
-  justify-content: center;
 
   /*width: 500px;
   height: 500px;*/
 }
 
 #country_info_container {
-  display: flex;
+  @include containerDisplay;
   margin: auto;
-  -ms-align-items: center;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
+  background: white;
+}
+
+// .current-country-container {
+// }
+
+.current-country-data {
+
 }
 
 #city_info_container {
-  display: flex;
+  @include containerDisplay;
   margin: auto;
-  -ms-align-items: center;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
   /*visibility: hidden;;*/
 }
 
 #donut-chart, #bar-chart, #bubble-chart {
-  display: flex;
+  @include containerDisplay;
   margin: auto;
-  -ms-align-items: center;
-  align-items: center;
-  justify-content: center;
 }
 
 div.tooltip {
