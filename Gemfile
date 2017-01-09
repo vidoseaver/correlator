@@ -64,7 +64,6 @@ group :development, :test do
   #so we can tell what's being hit by tests
   gem 'database_cleaner'
   #keep it clean
-
   gem 'table_print'
   #pretty print tables
 end
@@ -75,6 +74,7 @@ group :test do
   gem 'webmock'
   #used in conjuction with vcr to intercept out web calls
   gem 'selenium-webdriver'
+  #used for testign DOM events and UI
 end
 
   group :development do

@@ -1,5 +1,13 @@
 require 'vcr'
 require 'simplecov'
+
+ENV["RAILS_ENV"] ||= 'test'
+require File.expand_path("../../config/environment", __FILE__)
+require 'rspec/rails'
+
+require 'capybara/rspec'
+require 'capybara/rails'
+
 SimpleCov.start do
     add_filter "/spec/"
 end

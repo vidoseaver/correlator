@@ -174,28 +174,30 @@ function ready(world, names) {
           .attr("fill", colors.clickable)
           .attr("d", path)
           .attr("class", "clickable")
-          .attr("data-country-id", j)
+          .attr("data-country-id", names[j].id)
           .on("click", function() {
             console.log("clicked country", this)
             // ajaxCountryDataCall()
+// _______________________
+// Integrate CIA Factbook Data
+            // $(".current-country-CIA-data").append(
+            //   `<p>Hello Country<p>`
+            // )
 
-            $(".current-country-CIA-data").append(
-              `<p>Hello Country<p>`
-            )
-
-            // var clickedCountryID = $(this).attr("data-country-id")
+            var clickedCountryID = $(this).attr("data-country-id")
+            console.log('url', `http://corre1ator.herokuapp.com/api/v1/countries/${clickedCountryID}`)
             //
-            // $.ajax({
-            //   method: "GET",
-            //   url: "xyz",
-            //   async: true,
-            //   dataType: "json",
-            //   success: function(CIAFactbookData) {
-            //     displayCIAFactbookData(CIAFactbookData, clickedCountryID)
-            //     // ready(worldData[0], worldData[1])
-            //   // error: console.log(error)
-            //   }
-            // })
+            $.ajax({
+              method: "GET",
+              url: `http://corre1ator.herokuapp.com/api/v1/countries/${clickedCountryID}`,
+              async: true,
+              dataType: "json",
+              success: function(clickedCountry) {
+                displayClickedCountry(clickedCountry, clickedCountryID)
+                // ready(worldData[0], worldData[1])
+              // error: console.log(error)
+              }
+            })
 
             d3.selectAll(".clicked")
               .classed("clicked", false)
@@ -248,13 +250,19 @@ function ready(world, names) {
     }
   }
 
-  // function displayCIAFactbookData(CIAFactbookData, clickedCountryID) {
-  //   if (CIAFactbookData.id === clickedCountryID) {
-  //     $(".current-country-CIA-data").append(
-  //         `<p>Hello Country<p>`
-  //     )
-  //   }
-  // }
+  function displayCIAFactbookData(clickedCountry, clickedCountryID) {
+    // console.log('test')
+    console.log(clickedCountry)
+    if (clickedCountry.id === clickedCountryID) {
+      $(".current-country-CIA-data").append(`
+        <div class="country-facts-countainer"
+          <h1>clickedCountry.name</h1>
+
+
+      `
+      )
+    }
+  }
 
   map.insert("path", ".graticule")
     .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
