@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 20170108220918) do
   create_table "cities", force: :cascade do |t|
     t.integer  "country_id"
     t.string   "name"
+    t.string   "url"
+    t.string   "slug"
     t.float    "nomad_score"
     t.float    "life_score"
     t.float    "free_wifi_available"
