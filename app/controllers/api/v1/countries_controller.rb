@@ -1,6 +1,5 @@
 class Api::V1::CountriesController < ApplicationController
   def show
-    binding.pry
     render json: Country.find_by(d3_id: country_id)
   end
 
