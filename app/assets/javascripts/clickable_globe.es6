@@ -163,106 +163,137 @@ function ready(world, names) {
     .attr("class", "land")
     .attr("d", path);
 
-  for(var i = 0; i < names.length; i++) {
-    for (var j = 0; j < countries.length; j++) {
-      // console.log("country id", country[j].id)
-      if (countries[j].id == names[i].id) {
-        // console.log(countries[j].name)
-        // console.log(countries[j].id)
-        map.insert("path", ".graticule")
-          .datum(countries[j])
-          .attr("fill", colors.clickable)
-          .attr("d", path)
-          .attr("class", "clickable")
-          .attr("data-country-id", names[j].id)
-          .on("click", function() {
-            console.log("clicked country", this)
-            // ajaxCountryDataCall()
-// _______________________
-// Integrate CIA Factbook Data
-            // $(".current-country-CIA-data").append(
-            //   `<p>Hello Country<p>`
-            // )
+    for(var i = 0; i < names.length; i++) {
+      for (var j = 0; j < countries.length; j++) {
+        // console.log("country id", country[j].id)
+        if (countries[j].id == names[i].id) {
+          // console.log(countries[j].name)
+          // console.log(countries[j].id)
+          map.insert("path", ".graticule")
+            .datum(countries[j])
+            .attr("fill", colors.clickable)
+            .attr("d", path)
+            .attr("class", "clickable")
+            .attr("data-country-id", names[j].id)
+            .on("click", function() {
+              console.log("clicked country", this)
+              // ajaxCountryDataCall()
+    // _______________________
+    // Integrate CIA Factbook Data
+              // $(".current-country-CIA-data").append(
+              //   `<p>Hello Country<p>`
+              // )
 
-            var clickedCountryID = $(this).attr("data-country-id")
-            console.log('url', `http://corre1ator.herokuapp.com/api/v1/countries/${clickedCountryID}`)
-            //
-            $.ajax({
-              method: "GET",
-              url: `http://corre1ator.herokuapp.com/api/v1/countries/${clickedCountryID}`,
-              async: true,
-              dataType: "json",
-              success: function(clickedCountry) {
-                displayClickedCountry(clickedCountry, clickedCountryID)
-                // ready(worldData[0], worldData[1])
-              // error: console.log(error)
-              }
-            })
-
-            d3.selectAll(".clicked")
-              .classed("clicked", false)
-              .attr("fill", colors.clickable);
-            d3.select(this)
-              .classed("clicked", true)
-              .attr("fill", colors.clicked);
-
-            (function transition() {
-              // debugger;
-              d3.select(".clicked").transition()
-              .duration(1250)
-              .tween("rotate", function() {
-                var p = d3.geoCentroid(countries[d3.select(this).attr("data-country-id")]),
-                    r = d3.interpolate(projection.rotate(), [-p[0], -p[1]]);
-                return function (t) {
-                  projection.rotate(r(t));
-                  map.selectAll("path").attr("d", path);
+              var clickedCountryID = $(this).attr("data-country-id")
+              console.log('url', `http://corre1ator.herokuapp.com/api/v1/countries/${clickedCountryID}`)
+              //
+              $.ajax({
+                method: "GET",
+                url: `http://corre1ator.herokuapp.com/api/v1/countries/${clickedCountryID}`,
+                async: true,
+                dataType: "json",
+                success: function(clickedCountry) {
+                  renderCountryData(clickedCountry, clickedCountryID)
+                  // ready(worldData[0], worldData[1])
+                // error: console.log(error)
                 }
-              });
-            })();
-          })
-          .on("mousemove", function(d) {
-            // debugger
-            var c = d3.select(this);
-            if (c.classed("clicked")) {
-              c.attr("fill", colors.clickhover);
-            } else {
-              c.attr("fill", colors.hover);
-            }
+              })
 
-            // debugger;
-            var mouse = d3.mouse(map.node()).map(function(d) {
-              return parseInt(d);
+              d3.selectAll(".clicked")
+                .classed("clicked", false)
+                .attr("fill", colors.clickable);
+              d3.select(this)
+                .classed("clicked", true)
+                .attr("fill", colors.clicked);
+
+              (function transition() {
+                // debugger;
+                d3.select(".clicked").transition()
+                .duration(1250)
+                .tween("rotate", function() {
+                  var p = d3.geoCentroid(countries[d3.select(this).attr("data-country-id")]),
+                      r = d3.interpolate(projection.rotate(), [-p[0], -p[1]]);
+                  return function (t) {
+                    projection.rotate(r(t));
+                    map.selectAll("path").attr("d", path);
+                  }
+                });
+              })();
+            })
+            .on("mousemove", function(d) {
+              // debugger
+              var c = d3.select(this);
+              if (c.classed("clicked")) {
+                c.attr("fill", colors.clickhover);
+              } else {
+                c.attr("fill", colors.hover);
+              }
+
+              // debugger;
+              var mouse = d3.mouse(map.node()).map(function(d) {
+                return parseInt(d);
+              });
+              tooltip.classed("hidden", false)
+                .attr("style", "left:" + (mouse[0] + 15) +
+                  "px; top:" + (mouse[1] - 15) + "px")
+                .html(d.name);
+            })
+            .on("mouseout", function() {
+              var c = d3.select(this);
+              if (c.classed("clicked")) {
+                c.attr("fill", colors.clicked);
+              } else {
+                d3.select(this).attr("fill", colors.clickable);
+              }
             });
-            tooltip.classed("hidden", false)
-              .attr("style", "left:" + (mouse[0] + 15) +
-                "px; top:" + (mouse[1] - 15) + "px")
-              .html(d.name);
-          })
-          .on("mouseout", function() {
-            var c = d3.select(this);
-            if (c.classed("clicked")) {
-              c.attr("fill", colors.clicked);
-            } else {
-              d3.select(this).attr("fill", colors.clickable);
-            }
-          });
+        }
       }
     }
-  }
 
-  function displayCIAFactbookData(clickedCountry, clickedCountryID) {
-    // console.log('test')
-    console.log(clickedCountry)
-    if (clickedCountry.id === clickedCountryID) {
-      $(".current-country-CIA-data").append(`
-        <div class="country-facts-countainer"
-          <h1>clickedCountry.name</h1>
-
-
-      `
-      )
+    function renderCountryData(clickedCountry, clickedCountryID) {
+      // console.log('test')
+      console.log(clickedCountry)
+      $(".current-country-data").append(`<h1>HELLLLLLOOOOOOOOO</h1>`);
+      if (clickedCountry.id === clickedCountryID) {
+        // $(".current-country-data").append(`
+        //   <div class="country-facts-countainer">
+        //     <h1>clickedCountry.name</h1>
+        //     <h2>Capital: clickedCountry.capital</h2>
+        //     <h3>Population: clickedCountry.population</h3>
+        //
+        //     <h3>Government Type: clickedCountry.government_type</h3>
+        //     <h3>Dual Citizenship: clickedCountry.dual_citizenship</h3>
+        //     <h3>Residency Requirement: clickedCountry.residency_requirement</h3>
+        //     <h5>Net Migration Rate: clickedCountry.net_migration_rate</h5>
+        //
+        //     <h5>Urbanization: clickedCountry.urbanization</h5>
+        //     <h3>GDP/Capita: clickedCountry.gdp_per_capita</h3>
+        //     <h5>unemployment_rate: clickedCountry.unemployment_rate</h5>
+        //     <h5>Population Below Poverty Line: clickedCountry.population_below_poverty_line</h5>
+        //
+        //     <h5>Age_structure: clickedCountry.Age_structure</h5>
+        //     <h3>Median Age: clickedCountry.median_age</h3>
+        //     <h3>Sex Ratio: clickedCountry.sex_ratio</h3>
+        //     <h3>Languages: clickedCountry.languages</h3>
+        //     <h3>Ethnic Breakdown: clickedCountry.ethnic_breakdown</h3>
+        //     <h3>Religions: clickedCountry.religions</h3>
+        //
+        //     <h5>Climate: clickedCountry.climate</h5>
+        //     <h5>Coastlin: clickedCountry.coastline</h5>
+        //     <h5>Environment: clickedCountry.environment</h5>
+        //     <h5>Natural Resources: clickedCountry.natural_resources</h5>
+        //     <label>
+        //     <h5>Exports: clickedCountry.exports</h5>
+        //     </label>
+        //
+        //     <label>Historical Background:
+        //       <textarea>clickedCountry.background</textarea>
+        //     </label>
+        //   </div>
+        // `
+        // )
+      }
     }
-  }
 
   map.insert("path", ".graticule")
     .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))

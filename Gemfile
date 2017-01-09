@@ -42,8 +42,9 @@ gem 'faker'
 gem 'd3-rails'
 #for data visualization
 gem 'requirejs-rails', '~> 0.9.5'
-gem 'sprockets', '>=3.0.0.beta'
+gem 'sprockets', '>=3.0.0'
 gem 'sprockets-es6'
+gem 'babel-transpiler'
 
 gem "slugify"
 
@@ -66,6 +67,7 @@ group :development, :test do
   #keep it clean
   gem 'table_print'
   #pretty print tables
+  gem 'teaspoon-mocha'
 end
 
 group :test do
