@@ -2,8 +2,6 @@ FactoryGirl.define do
   factory :city do
     country
     name "MyString"
-    url "MyString"
-    slug "MyString"
     nomad_score 1.5
     life_score 1.5
     free_wifi_available 1.5

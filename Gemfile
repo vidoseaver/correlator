@@ -45,6 +45,8 @@ gem 'requirejs-rails', '~> 0.9.5'
 gem 'sprockets', '>=3.0.0.beta'
 gem 'sprockets-es6'
 
+gem "slugify"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
@@ -62,6 +64,9 @@ group :development, :test do
   #so we can tell what's being hit by tests
   gem 'database_cleaner'
   #keep it clean
+
+  gem 'table_print'
+  #pretty print tables
 end
 
 group :test do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161226183441) do
+ActiveRecord::Schema.define(version: 20170108220918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,8 +18,6 @@ ActiveRecord::Schema.define(version: 20161226183441) do
   create_table "cities", force: :cascade do |t|
     t.integer  "country_id"
     t.string   "name"
-    t.string   "url"
-    t.string   "slug"
     t.float    "nomad_score"
     t.float    "life_score"
     t.float    "free_wifi_available"
@@ -50,8 +48,31 @@ ActiveRecord::Schema.define(version: 20161226183441) do
     t.string   "name"
     t.string   "url"
     t.string   "slug"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.text     "background"
+    t.string   "climate"
+    t.string   "natural_resources"
+    t.string   "environment"
+    t.string   "population"
+    t.string   "languages"
+    t.string   "religions"
+    t.string   "age_structure"
+    t.string   "median_age"
+    t.string   "net_migration_rate"
+    t.string   "urbanization"
+    t.string   "sex_ratio"
+    t.string   "capital"
+    t.string   "dual_citizentship"
+    t.string   "residency_requirement"
+    t.string   "government_type"
+    t.string   "gdp_per_capita"
+    t.string   "unemployment_rate"
+    t.string   "population_below_poverty_line"
+    t.string   "exports"
+    t.string   "coastline"
+    t.string   "ethnic_breakdown"
+    t.integer  "d3_id"
   end
 
   add_foreign_key "cities", "countries"
