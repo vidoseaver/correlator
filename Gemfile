@@ -40,6 +40,11 @@ gem 'faraday'
 gem 'faker'
 # for seed data
 gem 'd3-rails'
+#for data visualization
+gem 'requirejs-rails', '~> 0.9.5'
+gem 'sprockets', '>=3.0.0'
+gem 'sprockets-es6'
+gem 'babel-transpiler'
 
 gem "slugify"
 
@@ -63,9 +68,9 @@ group :development, :test do
   #so we can tell what's being hit by tests
   gem 'database_cleaner'
   #keep it clean
-
   gem 'table_print'
   #pretty print tables
+  gem 'teaspoon-mocha'
 end
 
 group :test do
@@ -74,6 +79,7 @@ group :test do
   gem 'webmock'
   #used in conjuction with vcr to intercept out web calls
   gem 'selenium-webdriver'
+  #used for testign DOM events and UI
 end
 
   group :development do
