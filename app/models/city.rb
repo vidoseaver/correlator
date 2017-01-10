@@ -31,7 +31,7 @@ class City < ApplicationRecord
         cost_longterm_us:                  city[:scores][:longTerm],
         cost_shortterm_us:                 city[:scores][:shortTerm],
         air_bnb_vs_appartment_price_ratio: city[:scores][:airbnb_vs_apartment_price_ratio])
-        .find_or_create_by(slug: city[:scores][:slug])
+        .find_or_create_by(id: city[:scores][:id])
     end
   end
 end
