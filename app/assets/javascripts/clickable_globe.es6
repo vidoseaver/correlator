@@ -1,11 +1,47 @@
+// function renderWorldMap(height, width, scale) {
+//   let projection = d3.geoOrthographic()
+//     .scale(scale)
+//     .translate([width / 2, height / 2])
+//     .clipAngle(90)
+//     .precision(10);
+//
+//   let path = d3.geoPath()
+//     .projection(projection);
+//
+//
+//   //
+//
+//   renderMap();
+// }
+//
+//
+// renderWorldMap(450, 450, 400);
+//
+//
+// $('#zoom-in').click(e => {
+//   renderWorldMap(300, 300, 300);
+// })
+//
+//
+//
+// // responsiveness
+// detect browser dimensions in javascript
+// if ($(window).width() < 450) {
+// renderWorldMap(310, 310, 155);
+// } else {
+// renderWorldMap(450, 450, 225);
+// }
+
+
+
 var width = 450,
     height = 450;
 
 var colors = { clickable: "black", hover: "tomato", clicked: "orange", clickhover: "darkorange" };
 
 var projection = d3.geoOrthographic()
-  .scale(400)
-  // .scale(width / 2)
+  // .scale(400)
+  .scale(width / 2)
   .translate([width / 2, height / 2])
   .clipAngle(90)
   .precision(10);
@@ -77,23 +113,29 @@ $.ajax({
 
 // __________
 
-// $("#zoom-in").on("click", function() {
-//   projection = d3.geoOrthographic()
-//     .scale(400)
-//     .translate([width / 2, height / 2])
-//     .clipAngle(90)
-//     .precision(10);
-//   map.append("defs")
-//     .append("path")
-//     .datum({type: "Sphere"})
-//     .attr("id", "sphere")
-//     .attr("d", path);
-//     console.log('hello')
-//     // console.log(world_topo)
-//     // console.log(country_names)
-//
-//   renderWorld(world_topo, country_names)
-// })
+$("#zoom-in").on("click", function() {
+  // projection
+  //   .scale(400)
+  //   .translate()
+  //   .clipAngle()
+
+
+  projection = d3.geoOrthographic()
+    .scale(400)
+    .translate([width / 2, height / 2])
+    .clipAngle(90)
+    .precision(10);
+  map.append("defs")
+    .append("path")
+    .datum({type: "Sphere"})
+    .attr("id", "sphere")
+    .attr("d", path);
+    console.log('hello')
+    // console.log(world_topo)
+    // console.log(country_names)
+
+  renderWorld(world_topo, country_names)
+})
 
 // $("#zoom-out").on("click", function() {
 //   projection = d3.geoOrthographic()
@@ -151,13 +193,23 @@ function renderWorld(world, names) {
               $(".current-country-data").text("")
               $.ajax({
                 method: "GET",
-                url: `http://corre1ator.herokuapp.com/api/v1/countries/${databaseCountryID}`,
+                url: `/api/v1/countries/${databaseCountryID}`,
                 async: true,
                 dataType: "json",
                 success: function(clickedCountry) {
                   renderCountryData(clickedCountry, databaseCountryID)
                 }
               })
+              // $.ajax({
+              //   method: "GET",
+              //   url: `/api/v1/country_cities/database/${databaseCountryID}`,
+              //   async: true,
+              //   dataType: "json",
+              //   success: function(clickedCountryCities) {
+              //
+              //     renderCityData(clickedCountryCities, databaseCountryID)
+              //   }
+              // })
 
               d3.selectAll(".clicked")
                 .classed("clicked", false)
@@ -216,7 +268,7 @@ function renderWorld(world, names) {
 
         $(".current-country-data").append(`
           <section class="country-facts-container">
-            <h3 class="country-fact capital"><span class="fact-title">Capital:</span> ${clickedCountry.capital}</h2>
+            <h3 class="country-fact capital"><span class="fact-title">Capital:</span> ${clickedCountry.capital}</h3>
             <h3 class="country-fact"><span class="fact-title">Population:</span> ${clickedCountry.population}</h3>
             <h3 class="country-fact"><span class="fact-title">Languages:</span> ${clickedCountry.languages}</h3>
             <fieldset>
@@ -249,6 +301,19 @@ function renderWorld(world, names) {
       }
     }
 
+    // function renderCityData(clickedCountryCities, databaseCountryID) {
+    //   console.log('country d3 id', clickedCountryCities.d3_id)
+    //   console.log('databaseCountryID', clickedCountryCities.d3_id)
+    //   console.log('city liest', clickedCountryCities.city)
+    //   if (clickedCountryCities.d3_id == databaseCountryID) {
+    //     $(".current-country-data").append(`
+    //       <section class="city-name-container">
+    //         <h3 class="city-name-list"><span class="city-title">Cities:</span></h2>
+    //     `)
+    //     //  ${clickedCountryCities.city}
+    //   }
+    // }
+
   map.insert("path", ".graticule")
     .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
     .attr("class", "boundary")
@@ -256,6 +321,18 @@ function renderWorld(world, names) {
 };
 
 d3.select(self.frameElement).style("height", height + "px");
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // __________________________________________________
