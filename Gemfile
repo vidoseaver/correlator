@@ -45,6 +45,8 @@ gem 'requirejs-rails', '~> 0.9.5'
 gem 'sprockets', '>=3.0.0'
 gem 'sprockets-es6'
 gem 'babel-transpiler'
+# gem 'rack-cors'
+
 
 gem "slugify"
 
