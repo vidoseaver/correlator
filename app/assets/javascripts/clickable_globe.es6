@@ -98,11 +98,11 @@ map.append("path")
 //     map.selectAll('.state').attr('d', path);
 // }
 
-$("current-country-data").append(`
+$(".current-country-data").append(`
   <section>
-    <h2>Click a Country to View Its Data</h2>
+    <h3>Click a Country to View Its Data</h3>
     <p>
-      Once you've chosen a country, click on available cities. You will be able to view a Country's demographic information based on the CIA World Factbook. Once you click on a country, you can view a respective city's "livability" ratings courtesty of <a href="https://nomadlist.com/"><NomadList</a>.
+      Once you've chosen a country, click on available cities. You will be able to view a Country's demographic information based on the <a href="https://www.cia.gov/library/publications/the-world-factbook/">CIA World Factbook.</a> Once you click on a country, you can view a respective city's "livability" ratings courtesty of <a href="https://nomadlist.com/">NomadList</a>.
     </p>
 `)
 

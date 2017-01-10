@@ -1,24 +1,12 @@
 /*// Place all the styles related to the cities controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/*/
+
 @mixin containerDisplay {
   display: flex;
   -ms-align-items: center;
   align-items: center;
   justify-content: center;
-}
-
-@font-face {
-  src:
-  	local('BPmono'),
-  	local('BP-mono'),
-  	url('fonts/BPmono/BPmono.ttf')
-  	format('truetype');
-  src:
-  	local('Hack Regular'),
-  	local('Hack-Regular'),
-  	url('fonts/hack/Hack-Regular.ttf')
-  	format('truetype');
 }
 
 header {
@@ -27,61 +15,70 @@ header {
   flex-direction: column;
 }
 
-#app-title {
-  font-size: 60px;
-}
 
-#tagline {
-  font-size: 30px;
-}
-
-body {
-  font-family: 'Hack-Regular';
-  /*background: #212121;*/
-  background: url('./cracked-old-paper.jpg') no-repeat center center fixed;
-  background-size: cover;
-}
-
-// _________________________
 .globe-and-data-container {
   display: flex;
   -ms-align-items: center;
   align-items: flex-start;
   justify-content: flex-start;
   flex-direction: row;
-  margin-top: 30px;
+  // margin-top: 30px;
 }
 
 #globe_nav_container {
   margin: auto;
-
   /*width: 500px;
   height: 500px;*/
 }
 
-.current-country-data {
-  // color: white;
-}
-// _________________________
-#prim-country_info_container {
+#country_info_container {
   @include containerDisplay;
-  margin: auto;
-  flex-direction: column;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 20px;
-  width: 600px;
-  height: 450px;
-  padding: 20px;
+    margin: 0 20px;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    width: 600px;
+    height: 450px;
+    padding: 20px;
 
-  // filter: alpha(opacity=100); /* For IE8 and earlier */
+    // filter: alpha(opacity=100); /* For IE8 and earlier */
+  }
+
+h3.current-country-data {
+  font-size: 26px;
 }
 
-#sec-country_info_container {
-  @include containerDisplay;
-  margin: auto;
-  flex-direction: column;
-  // background: white;
+p.current-country-data {
+  font-size: 16px;
+  color: #000;
 }
+
+
+a:link, a:visited {
+  color: tomato;
+  // padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  // display: inline-block;
+}
+
+a:hover, a:active {
+  color: #fff;
+}
+
+textarea {
+  overflow-y: scroll;
+  height: 100px;
+  // resize: none; /* Remove this if you want the user to resize the textarea */
+}
+
+
+// #sec-country_info_container {
+//   @include containerDisplay;
+//   margin: auto;
+//   flex-direction: column;
+//   // background: white;
+// }
 
 #donut-chart, #bar-chart, #bubble-chart {
   @include containerDisplay;
@@ -96,12 +93,6 @@ div.tooltip {
   border-radius: 2px;
   opacity: 0.8;
   position: absolute;
-}
-
-textarea {
-  overflow-y: scroll;
-  height: 100px;
-  // resize: none; /* Remove this if you want the user to resize the textarea */
 }
 
 .fill {
@@ -123,11 +114,11 @@ textarea {
 }
 
 h1 {
-  color: #fff;
+  // color: #fff;
 }
 
 p {
-  color: #fff;
+  // color: #fff;
 }
 
 .stroke {

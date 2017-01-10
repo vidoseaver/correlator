@@ -2,6 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <%= stylesheet_link_tag "reset" %>
+    <%= stylesheet_link_tag "app" %>
+    <%= stylesheet_link_tag "mixins" %>
+    <%= stylesheet_link_tag "clickable_globe" %>
+    <%= stylesheet_link_tag "countries" %>
+    <%= stylesheet_link_tag "cities" %>
   </head>
 
   <header>
@@ -15,7 +21,7 @@
       <nav id="globe_nav_container">
       </nav>
 
-      <section id="prim-country_info_container">
+      <section id="country_info_container">
         <article class="current-country-data"></article>
         <article id="city-list"></article>
       </section>
@@ -42,7 +48,5 @@
     <script src="//d3js.org/topojson.v1.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <%= javascript_include_tag "clickable_globe.js" %>
-    <%= stylesheet_link_tag "reset" %>
-    <%= stylesheet_link_tag "clickable_globe" %>
   </body>
 </html>
