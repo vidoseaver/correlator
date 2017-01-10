@@ -12,12 +12,12 @@ describe "CountryCities country endpoint", type: :request do
 
     expect(response).to be_success
     expect(json.count).to eq(country.cities.count)
-    expect(json.first[:id]).to eq(city_2.id)
-    expect(json.first[:name]).to eq(city_2.name)
-    expect(json.first[:slug]).to eq(city_2.slug)
-    expect(json.second[:id]).to eq(city_1.id)
-    expect(json.second[:name]).to eq(city_1.name)
-    expect(json.second[:slug]).to eq(city_1.slug)
+    expect(json.first[:id]).to eq(city_1.id)
+    expect(json.first[:name]).to eq(city_1.name)
+    expect(json.first[:slug]).to eq(city_1.slug)
+    expect(json.second[:id]).to eq(city_2.id)
+    expect(json.second[:name]).to eq(city_2.name)
+    expect(json.second[:slug]).to eq(city_2.slug)
 
   end
 end

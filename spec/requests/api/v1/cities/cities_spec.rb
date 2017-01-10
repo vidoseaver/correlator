@@ -33,7 +33,6 @@ feature "CitiesSerializer", type: :request do
       first_city = json.first
 
       expect(first_city[:scores][:nomad_score]).to eq(city.nomad_score)
-      expect(first_city[:scores][:slug]).to eq(city.slug)
       expect(first_city[:scores][:life_score]).to eq(city.life_score)
       expect(first_city[:scores][:free_wifi_available]).to eq(city.free_wifi_available)
       expect(first_city[:scores][:peace_score]).to eq(city.peace_score)
