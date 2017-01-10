@@ -1,10 +1,10 @@
 class City < ApplicationRecord
   belongs_to :country
 
-  # attr_reader :id, :country_id, :name, :url, :slug, :nomad_score, :life_score, :free_wifi_available, :peace_score, :fragile_states_index, :freedom_score, :press_freedom_index, :nightlife, :leisure, :places_to_work, :air_con, :safety, :friendly_to_foreigners, :racism, :lgbt_friendly, :female_friendly, :air_bnb_median_us, :cost_as_nomad_us, :cost_longterm_us, :cost_shortterm_us, :air_bnb_vs_appartment_price_ratio
 
   def self.populate_cities
     all_cities = HerokuAppService.new.all_cities
+    binding.pry
     all_cities.map do |city|
       City.create_with(
         name:                              city[:name],
@@ -31,7 +31,7 @@ class City < ApplicationRecord
         cost_longterm_us:                  city[:scores][:longTerm],
         cost_shortterm_us:                 city[:scores][:shortTerm],
         air_bnb_vs_appartment_price_ratio: city[:scores][:airbnb_vs_apartment_price_ratio])
-        .find_or_create_by(slug: city[:scores][:slug])
+        .find_or_create_by(id: city[:scores][:id])
     end
   end
 end
