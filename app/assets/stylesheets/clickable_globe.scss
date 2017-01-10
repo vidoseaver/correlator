@@ -1,19 +1,35 @@
 /*// Place all the styles related to the cities controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/*/
+
+@font-face {
+  src:
+    local('BP mono'),
+    local('BP-mono'),
+    url('fonts/BPmono/BPmono.ttf')
+    format('truetype');
+  src:
+    local('Hack Regular'),
+    local('Hack-Regular'),
+    url('fonts/hack/Hack-Regular.ttf')
+    format('truetype');
+  src:
+    local('UbuntoMono'),
+    local('UbuntuMono-R'),
+    url('fonts/ubuntu-mono/UbuntuMonoR.ttf')
+    format('truetype');
+  src:
+    local('sax Mono'),
+    local('saxmono'),
+    url('fonts/saxMono/saxmono.ttf')
+    format('truetype');
+}
+
 @mixin containerDisplay {
   display: flex;
   -ms-align-items: center;
   align-items: center;
   justify-content: center;
-}
-
-@font-face {
-  src:
-  	local('BPmono'),
-  	local('BP-mono'),
-  	url('fonts/BPmono/BPmono.ttf')
-  	format('truetype');
 }
 
 header {
@@ -22,44 +38,101 @@ header {
   flex-direction: column;
 }
 
-body {
-  font-family: 'BPmono';
-  /*background: #212121;*/
-  background: url('./cracked-old-paper.jpg') no-repeat center center fixed;
-  background-size: cover;
+h3#instructions-title {
+  color: #fff;
+  font-size: 24px;
+  line-height: 28px;
+  margin: 20px 0px;
+}
+
+p#instructions {
+  font-size: 16px;
+  line-height: 22px;
+  color: #d2cdcd;
 }
 
 .globe-and-data-container {
-  @include containerDisplay;
+  display: flex;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: space-around;
   flex-direction: row;
-}
-
-#globe_nav_container {
-  margin: auto;
-
-  /*width: 500px;
-  height: 500px;*/
+  margin: 20px 20px;
 }
 
 #country_info_container {
   @include containerDisplay;
-  margin: auto;
+  margin: 0 0 0 20px;
   flex-direction: column;
-  background: white;
+  // background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+  width: 600px;
+  height: 430px;
+  padding: 20px;
 }
-
-// .current-country-container {
-// }
 
 .current-country-data {
-
+  overflow-y: scroll;
+  line-height: 22px;
+  font-size: 16px;
 }
 
-#city_info_container {
-  @include containerDisplay;
-  margin: auto;
-  flex-direction: column;
-  /*visibility: hidden;;*/
+h3.country-fact {
+  margin: 7px;
+  max-width: 500px;
+  color: #d2cdcd;
+  font-family: 'Hack-Regular';
+}
+
+h3.capital.country-fact {
+  font-size: 20px;
+  color: orange;
+}
+
+span.fact-title {
+  color: tomato;
+  font-family: 'saxmono';
+  font-size: 18px;
+  // margin: 7px;
+}
+
+.h-background-title {
+  margin: 7px;
+}
+
+h3.current-country-data {
+  font-size: 26px;
+}
+
+p.current-country-data {
+  font-size: 16px;
+  color: #d2cdcd;
+}
+
+a:link, a:visited {
+  color: tomato;
+  text-align: center;
+  text-decoration: none;
+}
+
+a:hover, a:active {
+  color: #fff;
+}
+
+textarea#country-background {
+  overflow-y: scroll;
+  height: 100px;
+  width: 500px;
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.6);
+	padding: 5px;
+  font-size: 14px;
+	font-family: 'Hack-Regular';
+  display: block;
+  margin: 10px auto;
+  color: #e8e8e8;
 }
 
 #donut-chart, #bar-chart, #bubble-chart {
@@ -67,42 +140,20 @@ body {
   margin: auto;
 }
 
+div.hidden {
+  display: none;
+}
+
 div.tooltip {
   color: #000;
   background-color: #f9d477;
-  padding: .2em .4em;
+  padding: 5px 5px 4px 5px;
   text-shadow: #f7eaca 0 1px 0;
   border-radius: 2px;
   opacity: 0.8;
   position: absolute;
 }
-
-.fill {
-  /*width = 950,
-  height = 700;*/
-}
-
-.stroke {
-  /*width = 950,
-  height = 700;*/
-}
-
-.map {
-  /*float: left;*/
-}
-
-#sphere {
-  /*display: block;*/
-}
-
-h1 {
-  color: yellow;
-}
-
-p {
-  color: #fff;
-}
-
+// ______________________________
 .stroke {
   fill: none;
   stroke: #000;
@@ -128,4 +179,68 @@ p {
   fill: none;
   stroke: #fff;
   stroke-width: .5px;
+}
+
+@media (max-width: 1200) {
+  .globe-and-data-container {
+    // justify-content: space-around;
+    // flex-direction: row;
+    // margin: 20px 20px;
+  }
+  #country_info_container {
+    // margin: 0 0 0 20px;
+    // flex-direction: column;
+    // border-radius: 20px;
+    width: 450px;
+    height: 365px;
+    padding: 20px;
+  }
+  .current-country-data {
+    // overflow-y: scroll;
+    // line-height: 22px;
+    // font-size: 16px;
+  }
+  h3.country-fact {
+    max-width: 410px;
+  }
+  textarea#country-background {
+    // height: 100px;
+    width: 410px;
+    // border-radius: 5px;
+  	// padding: 5px;
+    // font-size: 14px;
+    // margin: 10px auto;
+  }
+}
+
+@media (max-width: 1000) {
+  .globe-and-data-container {
+    // justify-content: space-around;
+    // flex-direction: row;
+    // margin: 20px 20px;
+  }
+  #country_info_container {
+    // margin: 0 0 0 20px;
+    // flex-direction: column;
+    // border-radius: 20px;
+    width: 300px;
+    height: 290px;
+    // padding: 20px;
+  }
+  .current-country-data {
+    // overflow-y: scroll;
+    // line-height: 22px;
+    // font-size: 16px;
+  }
+  h3.country-fact {
+    max-width: 280px;
+  }
+  textarea#country-background {
+    // height: 100px;
+    width: 280px;
+    // border-radius: 5px;
+  	// padding: 5px;
+    // font-size: 14px;
+    // margin: 10px auto;
+  }
 }

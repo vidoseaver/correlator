@@ -12,4 +12,4 @@ Rails.application.config.assets.version = '1.0'
 
 Rails.application.config.assets.precompile += %w( clickable_globe.js )
 
-Rails.application.config.assets.precompile += %w( clickable_globe.css )
+Rails.application.config.assets.precompile += %w( reset.css application.css app.css mixins.scss clickable_globe.css countries.css cities.css )
