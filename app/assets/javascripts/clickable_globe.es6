@@ -1,13 +1,13 @@
 // var margin = {top: 10, left: 10, bottom: 10, right: 10},
-var margin = 10,
-    width = parseInt(d3.select('#globe_nav_container').style('width')),
-    width = width - margin - margin,
-    mapRatio = .5,
-    height = width * mapRatio;
+// var margin = 10,
+//     width = parseInt(d3.select('#globe_nav_container').style('width')),
+//     width = width - margin - margin,
+//     mapRatio = .5,
+//     height = width * mapRatio;
 
 //
-var width = 400,
-    height = 400;
+var width = 450,
+    height = 450;
 // var width = 950,
 //     height = 700;
 
@@ -75,28 +75,36 @@ map.append("path")
   .attr("class", "graticule")
   .attr("d", path);
 
-d3.select(window).on('resize', resizeGlobe);
+// d3.select(window).on('resize', resizeGlobe);
+//
+// function resizeGlobe() {
+//     // adjust things when the window size changes
+//     width = parseInt(d3.select('#globe_nav_container').style('width'));
+//     width = width - margin.left - margin.right;
+//     height = width * mapRatio;
+//
+//     // update projection
+//     projection
+//       .translate([width / 2, height / 2])
+//       .scale(width);
+//
+//     // resize the map container
+//     map
+//       .style('width', width + 'px')
+//       .style('height', height + 'px');
+//
+//     // resize the map
+//     map.select('.land').attr('d', path);
+//     map.selectAll('.state').attr('d', path);
+// }
 
-function resizeGlobe() {
-    // adjust things when the window size changes
-    width = parseInt(d3.select('#globe_nav_container').style('width'));
-    width = width - margin.left - margin.right;
-    height = width * mapRatio;
-
-    // update projection
-    projection
-      .translate([width / 2, height / 2])
-      .scale(width);
-
-    // resize the map container
-    map
-      .style('width', width + 'px')
-      .style('height', height + 'px');
-
-    // resize the map
-    map.select('.land').attr('d', path);
-    map.selectAll('.state').attr('d', path);
-}
+$("current-country-data").append(`
+  <section>
+    <h2>Click a Country to View Its Data</h2>
+    <p>
+      Once you've chosen a country, click on available cities. You will be able to view a Country's demographic information based on the CIA World Factbook. Once you click on a country, you can view a respective city's "livability" ratings courtesty of <a href="https://nomadlist.com/"><NomadList</a>.
+    </p>
+`)
 
 $.ajax({
   method: "GET",
@@ -161,7 +169,9 @@ function ready(world, names) {
     // _______________________
     // Integrate CIA Factbook Data
               var databaseCountryID = $(this).attr("database-id")
+              $("#country-name-title").text("")
               $(".current-country-data").text("")
+              // $(".current-country-data-2").text("")
               $.ajax({
                 method: "GET",
                 url: `http://corre1ator.herokuapp.com/api/v1/countries/${databaseCountryID}`,
@@ -235,12 +245,14 @@ function ready(world, names) {
       // console.log('databaseCountryID', databaseCountryID)
       if (clickedCountry.d3_id == databaseCountryID) {
         // $(".current-country-data").append(`<h1>HELLLLLLOOOOOOOOO</h1>`);
-        $(".current-country-data").append(`
-          <div class="country-facts-countainer">
-            <h1>${clickedCountry.name}</h1>
+        $("#country-name-title").append(`
+          <h1>${clickedCountry.name}</h1>
+          `)
+
+        $(".current-country-data-1").append(`
+          <section class="country-facts-countainer">
             <h2>Capital: ${clickedCountry.capital}</h2>
             <h3>Population: ${clickedCountry.population}</h3>
-
             <h3>Government Type: ${clickedCountry.government_type}</h3>
             <h3>Dual Citizenship: ${clickedCountry.dual_citizenship}</h3>
             <h3>Residency Requirement: ${clickedCountry.residency_requirement}</h3>
@@ -248,7 +260,7 @@ function ready(world, names) {
 
             <h5>Urbanization: ${clickedCountry.urbanization}</h5>
             <h3>GDP/Capita: ${clickedCountry.gdp_per_capita}</h3>
-            <h5>unemployment_rate: ${clickedCountry.unemployment_rate}</h5>
+            <h5>Unemployment_rate: ${clickedCountry.unemployment_rate}</h5>
             <h5>Population Below Poverty Line: ${clickedCountry.population_below_poverty_line}</h5>
 
             <h5>Age_structure: ${clickedCountry.Age_structure}</h5>
@@ -259,7 +271,7 @@ function ready(world, names) {
             <h3>Religions: ${clickedCountry.religions}</h3>
 
             <h5>Climate: ${clickedCountry.climate}</h5>
-            <h5>Coastlin: ${clickedCountry.coastline}</h5>
+            <h5>Coastline: ${clickedCountry.coastline}</h5>
             <h5>Environment: ${clickedCountry.environment}</h5>
             <h5>Natural Resources: ${clickedCountry.natural_resources}</h5>
             <label>
@@ -269,9 +281,8 @@ function ready(world, names) {
             <label>Historical Background:
               <textarea>${clickedCountry.background}</textarea>
             </label>
-          </div>
-        `
-        )
+          </section>
+        `)
       }
     }
 

@@ -14,6 +14,11 @@
   	local('BP-mono'),
   	url('fonts/BPmono/BPmono.ttf')
   	format('truetype');
+  src:
+  	local('Hack Regular'),
+  	local('Hack-Regular'),
+  	url('fonts/hack/Hack-Regular.ttf')
+  	format('truetype');
 }
 
 header {
@@ -22,16 +27,29 @@ header {
   flex-direction: column;
 }
 
+#app-title {
+  font-size: 60px;
+}
+
+#tagline {
+  font-size: 30px;
+}
+
 body {
-  font-family: 'BPmono';
+  font-family: 'Hack-Regular';
   /*background: #212121;*/
   background: url('./cracked-old-paper.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
+// _________________________
 .globe-and-data-container {
-  @include containerDisplay;
+  display: flex;
+  -ms-align-items: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   flex-direction: row;
+  margin-top: 30px;
 }
 
 #globe_nav_container {
@@ -41,25 +59,28 @@ body {
   height: 500px;*/
 }
 
-#country_info_container {
-  @include containerDisplay;
-  margin: auto;
-  flex-direction: column;
-  background: white;
-}
-
-// .current-country-container {
-// }
-
 .current-country-data {
-
+  // color: white;
 }
-
-#city_info_container {
+// _________________________
+#prim-country_info_container {
   @include containerDisplay;
   margin: auto;
   flex-direction: column;
-  /*visibility: hidden;;*/
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  width: 600px;
+  height: 450px;
+  padding: 20px;
+
+  // filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+
+#sec-country_info_container {
+  @include containerDisplay;
+  margin: auto;
+  flex-direction: column;
+  // background: white;
 }
 
 #donut-chart, #bar-chart, #bubble-chart {
@@ -75,6 +96,12 @@ div.tooltip {
   border-radius: 2px;
   opacity: 0.8;
   position: absolute;
+}
+
+textarea {
+  overflow-y: scroll;
+  height: 100px;
+  // resize: none; /* Remove this if you want the user to resize the textarea */
 }
 
 .fill {
@@ -96,7 +123,7 @@ div.tooltip {
 }
 
 h1 {
-  color: yellow;
+  color: #fff;
 }
 
 p {
