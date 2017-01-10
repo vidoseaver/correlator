@@ -1,5 +1,5 @@
 class Api::V1::CitySerializer < ActiveModel::Serializer
-  attributes :name, :scores :country
+  attributes :name, :scores, :country
 
   def scores
     @instance_options[:option_name].keys.reduce({}) do |hash, key|
