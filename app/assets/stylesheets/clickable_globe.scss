@@ -4,15 +4,25 @@
 
 @font-face {
   src:
-  local('BPmono'),
-  local('BP-mono'),
-  url('fonts/BPmono/BPmono.ttf')
-  format('truetype');
+    local('BP mono'),
+    local('BP-mono'),
+    url('fonts/BPmono/BPmono.ttf')
+    format('truetype');
   src:
-  local('Hack Regular'),
-  local('Hack-Regular'),
-  url('fonts/hack/Hack-Regular.ttf')
-  format('truetype');
+    local('Hack Regular'),
+    local('Hack-Regular'),
+    url('fonts/hack/Hack-Regular.ttf')
+    format('truetype');
+  src:
+    local('UbuntoMono'),
+    local('UbuntuMono-R'),
+    url('fonts/ubuntu-mono/UbuntuMonoR.ttf')
+    format('truetype');
+  src:
+    local('sax Mono'),
+    local('saxmono'),
+    url('fonts/saxMono/saxmono.ttf')
+    format('truetype');
 }
 
 @mixin containerDisplay {
@@ -28,47 +38,38 @@ header {
   flex-direction: column;
 }
 
-
-#globe_nav_container {
-  margin: auto;
-  // border-color: red;
-  border: 2px black;
-  /*width: 500px;
-  height: 500px;*/
-}
-
 h3#instructions-title {
-  color: #323131;
+  color: #fff;
   font-size: 24px;
+  line-height: 28px;
   margin: 20px 0px;
 }
 
 p#instructions {
   font-size: 16px;
   line-height: 22px;
+  color: #d2cdcd;
 }
 
 .globe-and-data-container {
   display: flex;
   -ms-align-items: center;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: space-around;
   flex-direction: row;
-  margin: 20px 0;
-  // margin-top: 30px;
+  margin: 20px 20px;
 }
 
 #country_info_container {
   @include containerDisplay;
-  margin: 0 20px;
+  margin: 0 0 0 20px;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.4);
+  // background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
   border-radius: 20px;
   width: 600px;
   height: 430px;
   padding: 20px;
-  // height: 100px;
-  // filter: alpha(opacity=100); /* For IE8 and earlier */
 }
 
 .current-country-data {
@@ -79,14 +80,25 @@ p#instructions {
 
 h3.country-fact {
   margin: 7px;
+  max-width: 500px;
+  color: #d2cdcd;
+  font-family: 'Hack-Regular';
 }
 
-.capital {
+h3.capital.country-fact {
   font-size: 20px;
+  color: orange;
 }
 
 span.fact-title {
-  color: red;
+  color: tomato;
+  font-family: 'saxmono';
+  font-size: 18px;
+  // margin: 7px;
+}
+
+.h-background-title {
+  margin: 7px;
 }
 
 h3.current-country-data {
@@ -95,15 +107,13 @@ h3.current-country-data {
 
 p.current-country-data {
   font-size: 16px;
-  color: #000;
+  color: #d2cdcd;
 }
 
 a:link, a:visited {
   color: tomato;
-  // padding: 14px 25px;
   text-align: center;
   text-decoration: none;
-  // display: inline-block;
 }
 
 a:hover, a:active {
@@ -113,29 +123,17 @@ a:hover, a:active {
 textarea#country-background {
   overflow-y: scroll;
   height: 100px;
-  width: 550px;
+  width: 500px;
   border-radius: 5px;
   border: none;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(0, 0, 0, 0.6);
 	padding: 5px;
   font-size: 14px;
 	font-family: 'Hack-Regular';
   display: block;
   margin: 10px auto;
-
-  // vertical-align: top;
-	// background-position: bottom left;
-	// background-repeat: no-repeat;
-  // resize: none; /* Remove this if you want the user to resize the textarea */
+  color: #e8e8e8;
 }
-
-
-// #sec-country_info_container {
-//   @include containerDisplay;
-//   margin: auto;
-//   flex-direction: column;
-//   // background: white;
-// }
 
 #donut-chart, #bar-chart, #bubble-chart {
   @include containerDisplay;
@@ -149,39 +147,13 @@ div.hidden {
 div.tooltip {
   color: #000;
   background-color: #f9d477;
-  padding: .3em .5em;
+  padding: 5px 5px 4px 5px;
   text-shadow: #f7eaca 0 1px 0;
   border-radius: 2px;
   opacity: 0.8;
   position: absolute;
 }
-
-.fill {
-  /*width = 950,
-  height = 700;*/
-}
-
-.stroke {
-  /*width = 950,
-  height = 700;*/
-}
-
-.map {
-  /*float: left;*/
-}
-
-#sphere {
-  /*display: block;*/
-}
-
-h1 {
-  // color: #fff;
-}
-
-p {
-  // color: #fff;
-}
-
+// ______________________________
 .stroke {
   fill: none;
   stroke: #000;
@@ -207,4 +179,68 @@ p {
   fill: none;
   stroke: #fff;
   stroke-width: .5px;
+}
+
+@media (max-width: 1200) {
+  .globe-and-data-container {
+    // justify-content: space-around;
+    // flex-direction: row;
+    // margin: 20px 20px;
+  }
+  #country_info_container {
+    // margin: 0 0 0 20px;
+    // flex-direction: column;
+    // border-radius: 20px;
+    width: 450px;
+    height: 365px;
+    padding: 20px;
+  }
+  .current-country-data {
+    // overflow-y: scroll;
+    // line-height: 22px;
+    // font-size: 16px;
+  }
+  h3.country-fact {
+    max-width: 410px;
+  }
+  textarea#country-background {
+    // height: 100px;
+    width: 410px;
+    // border-radius: 5px;
+  	// padding: 5px;
+    // font-size: 14px;
+    // margin: 10px auto;
+  }
+}
+
+@media (max-width: 1000) {
+  .globe-and-data-container {
+    // justify-content: space-around;
+    // flex-direction: row;
+    // margin: 20px 20px;
+  }
+  #country_info_container {
+    // margin: 0 0 0 20px;
+    // flex-direction: column;
+    // border-radius: 20px;
+    width: 300px;
+    height: 290px;
+    // padding: 20px;
+  }
+  .current-country-data {
+    // overflow-y: scroll;
+    // line-height: 22px;
+    // font-size: 16px;
+  }
+  h3.country-fact {
+    max-width: 280px;
+  }
+  textarea#country-background {
+    // height: 100px;
+    width: 280px;
+    // border-radius: 5px;
+  	// padding: 5px;
+    // font-size: 14px;
+    // margin: 10px auto;
+  }
 }

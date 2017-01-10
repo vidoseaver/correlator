@@ -1,31 +1,10 @@
-// var margin = {top: 10, left: 10, bottom: 10, right: 10},
-// var margin = 10,
-//     width = parseInt(d3.select('#globe_nav_container').style('width')),
-//     width = width - margin - margin,
-//     mapRatio = .5,
-//     height = width * mapRatio;
-
-//
 var width = 450,
     height = 450;
-// var width = 950,
-//     height = 700;
 
 var colors = { clickable: "black", hover: "tomato", clicked: "orange", clickhover: "darkorange" };
 
-// window.addEventListener("resize", resize);
-
-// d3.select(window)
-// 	.on("resize", resize);
-//
-// function resize() {
-//   d3.select("g").attr("transform", "scale(" + $("#globe_container").width()/900 + ")");
-//   $("svg").height($("#globe_container").width()*0.618);
-// }
-
 var projection = d3.geoOrthographic()
   .scale(width / 2)
-  // .scale(175)
   .translate([width / 2, height / 2])
   .clipAngle(90)
   .precision(10);
@@ -41,17 +20,9 @@ var map = d3.select("#globe_nav_container")
   .attr("height", height)
   .attr("class", "map");
 
-  // .append("g")
-  //   .call(d3.zoom().on("zoom", function() {
-  //     map.attr(zoom)
-  //   }))
-  // .append("g");
-
 var tooltip = d3.select("#globe_nav_container")
   .append("div")
   .attr("class", "hidden tooltip");
-
-// var g = map.append("g");
 
 map.append("defs")
   .append("path")
@@ -60,9 +31,9 @@ map.append("defs")
   .attr("d", path);
 
 //APPENDS OUTER GLOBE BORDER
-map.append("use")
-  .attr("class", "stroke")
-  .attr("xlink:href", "#sphere");
+// map.append("use")
+//   .attr("class", "stroke")
+//   .attr("xlink:href", "#sphere");
 
 //APPENDS COLORING (OUTER-COUNTRY FILL)
 // map.append("use")
@@ -70,33 +41,10 @@ map.append("use")
 //   .attr("xlink:href", "#sphere");
 
 // APPENDS GRIDLINES
-map.append("path")
-  .datum(graticule)
-  .attr("class", "graticule")
-  .attr("d", path);
-
-// d3.select(window).on('resize', resizeGlobe);
-//
-// function resizeGlobe() {
-//     // adjust things when the window size changes
-//     width = parseInt(d3.select('#globe_nav_container').style('width'));
-//     width = width - margin.left - margin.right;
-//     height = width * mapRatio;
-//
-//     // update projection
-//     projection
-//       .translate([width / 2, height / 2])
-//       .scale(width);
-//
-//     // resize the map container
-//     map
-//       .style('width', width + 'px')
-//       .style('height', height + 'px');
-//
-//     // resize the map
-//     map.select('.land').attr('d', path);
-//     map.selectAll('.state').attr('d', path);
-// }
+// map.append("path")
+//   .datum(graticule)
+//   .attr("class", "graticule")
+//   .attr("d", path);
 
 $("#country-name-title").append(`
   <h2>Select a Country<h2>
@@ -111,44 +59,75 @@ $(".current-country-data").append(`
   </sectin>
 `)
 
+var world_topo = "";
+var country_names = "";
+
 $.ajax({
   method: "GET",
   url: "/world_data",
   async: true,
   dataType: "json",
   success: function(world_data) {
-    ready(world_data[0], world_data[1])
+    world_topo = world_data[0];
+    country_names = world_data[1];
+    renderWorld(world_data[0], world_data[1])
   }
 })
 
-// d3.queue()
-//   .defer(d3.json, "world-110m.json")
-//   .defer(d3.tsv, "world-country-names.tsv")
-//   .await(ready);
+// __________
 
-function ready(world, names) {
-  // debugger;
-  // if (error) throw error;
+$("#zoom-in").on("click", function() {
+  projection = d3.geoOrthographic()
+    .scale(400)
+    .translate([width / 2, height / 2])
+    .clipAngle(90)
+    .precision(10);
+  map.append("defs")
+    .append("path")
+    .datum({type: "Sphere"})
+    .attr("id", "sphere")
+    .attr("d", path);
+    console.log('hello')
+    // console.log(world_topo)
+    // console.log(country_names)
+
+  renderWorld(world_topo, country_names)
+})
+
+// $("#zoom-out").on("click", function() {
+//   projection = d3.geoOrthographic()
+//     .scale(width / 2)
+//     .translate([width / 2, height / 2])
+//     .clipAngle(90)
+//     .precision(10);
+// })
+
+// __________
+// window.addEventListener("resize", resize);
+
+// d3.select(window)
+// 	.on("resize", resize);
+//
+// function resize() {
+//   d3.select("#globe_nav_container").attr("transform", "scale(" + $("#globe_container").width()/900 + ")");
+//   $("#globe_nav_container").height($("#globe_container").width()*0.618);
+// }
+  // __________
+
+function renderWorld(world, names) {
   var world = JSON.parse(world)
   var names = d3.tsvParse(names)
-  // debugger;
-  // console.log(names)
-
   var globe = {type: "Sphere"},
     land = topojson.feature(world, world.objects.land),
     countries = topojson.feature(world, world.objects.countries).features,
     borders = topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; });
-    // console.log("1", countries)
   countries = countries.filter(function(d) {
     return names.some(function(n) {
-      // debugger;
       if (d.id == n.id) return d.name = n.name;
     });
   }).sort(function(a, b) {
-    // debugger;
     return a.name.localeCompare(b.name);
   });
-  // console.log("# of countries", countries.length)
 
   map.insert("path", ".graticule")
     .datum(topojson.feature(world, world.objects.land))
@@ -157,10 +136,7 @@ function ready(world, names) {
 
     for(var i = 0; i < names.length; i++) {
       for (var j = 0; j < countries.length; j++) {
-        // console.log("country id", country[j].id)
         if (countries[j].id == names[i].id) {
-          // console.log(countries[j].name)
-          // console.log(countries[j].id)
           map.insert("path", ".graticule")
             .datum(countries[j])
             .attr("fill", colors.clickable)
@@ -168,27 +144,17 @@ function ready(world, names) {
             .attr("class", "clickable")
             .attr("world110-country-id", j)
             .attr("database-id", names[i].id)
-            // .on("click", zoomCountry)
             .on("click", function() {
-              console.log("clicked country", this)
-    // _______________________
-    // Integrate CIA Factbook Data
               var databaseCountryID = $(this).attr("database-id")
 
               $(".current-country-data").text("")
-              // $(".current-country-data-2").text("")
               $.ajax({
                 method: "GET",
                 url: `http://corre1ator.herokuapp.com/api/v1/countries/${databaseCountryID}`,
                 async: true,
                 dataType: "json",
                 success: function(clickedCountry) {
-                  // debugger;
-                  // console.log('world110CountryID', world110CountryID)
-                  // console.log('clickedCountry', clickedCountry)
                   renderCountryData(clickedCountry, databaseCountryID)
-                  // ready(worldData[0], worldData[1])
-                // error: console.log(error)
                 }
               })
 
@@ -200,7 +166,6 @@ function ready(world, names) {
                 .attr("fill", colors.clicked);
 
               (function transition() {
-                // debugger;
                 d3.select(".clicked").transition()
                 .duration(1250)
                 .tween("rotate", function() {
@@ -210,13 +175,10 @@ function ready(world, names) {
                     projection.rotate(r(t));
                     map.selectAll("path").attr("d", path);
                   }
-
-
                 });
               })();
             })
             .on("mousemove", function(d) {
-              // debugger
               var c = d3.select(this);
               if (c.classed("clicked")) {
                 c.attr("fill", colors.clickhover);
@@ -224,13 +186,12 @@ function ready(world, names) {
                 c.attr("fill", colors.hover);
               }
 
-              // debugger;
               var mouse = d3.mouse(map.node()).map(function(d) {
                 return parseInt(d);
               });
               tooltip.classed("hidden", false)
-                .attr("style", "left:" + (mouse[0] + 175) +
-                  "px; top:" + (mouse[1] + 220) + "px")
+                .attr("style", "left:" + (mouse[0] - 11) +
+                  "px; top:" + (mouse[1] + 260) + "px")
                 .html(d.name);
             })
             .on("mouseout", function() {
@@ -246,14 +207,11 @@ function ready(world, names) {
     }
 
     function renderCountryData(clickedCountry, databaseCountryID) {
-      // console.log('clickedCountry', clickedCountry.d3_id)
-      // console.log('databaseCountryID', databaseCountryID)
       if (clickedCountry.d3_id == databaseCountryID) {
-        // $(".current-country-data").append(`<h1>HELLLLLLOOOOOOOOO</h1>`);
         $("#country-name-title").text("")
         $("#country-name-title").append(`
           <h1>${clickedCountry.name}</h1>
-          `)
+        `)
 
         $(".current-country-data").append(`
           <section class="country-facts-countainer">
@@ -261,7 +219,7 @@ function ready(world, names) {
             <h3 class="country-fact"><span class="fact-title">Population:</span> ${clickedCountry.population}</h3>
             <h3 class="country-fact"><span class="fact-title">Languages:</span> ${clickedCountry.languages}</h3>
             <fieldset>
-              <legend><span class="fact-title">Historical Background:</span></legend>
+              <legend><span class="fact-title h-background-title">Historical Background:</span></legend>
               <textarea id="country-background">${clickedCountry.background}</textarea>
             </fieldset>
             <h3 class="country-fact"><span class="fact-title">Government Type:</span> ${clickedCountry.government_type}</h3>
@@ -274,7 +232,6 @@ function ready(world, names) {
             <h3 class="country-fact"><span class="fact-title">Unemployment_rate:</span> ${clickedCountry.unemployment_rate}</h3>
             <h3 class="country-fact"><span class="fact-title">Population Below Poverty Line:</span> ${clickedCountry.population_below_poverty_line}</h3>
 
-            <h3 class="country-fact"><span class="fact-title">Age_structure:</span> ${clickedCountry.Age_structure}</h3>
             <h3 class="country-fact"><span class="fact-title">Median Age:</span> ${clickedCountry.median_age}</h3>
             <h3 class="country-fact"><span class="fact-title">Sex Ratio:</span> ${clickedCountry.sex_ratio}</h3>
             <h3 class="country-fact"><span class="fact-title">Ethnic Breakdown:</span> ${clickedCountry.ethnic_breakdown}</h3>
@@ -295,7 +252,6 @@ function ready(world, names) {
     .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
     .attr("class", "boundary")
     .attr("d", path);
-  // debugger
 };
 
 d3.select(self.frameElement).style("height", height + "px");
