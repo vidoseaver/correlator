@@ -29,8 +29,24 @@
   format('truetype');
 }
 
+#app-title, #country-name-title {
+  font-family: 'Hack-Regular';
+}
+
 #app-title {
   font-size: 60px;
+  margin: 30px auto 20px auto;
+  color: #fff;
+}
+
+#country-name-title {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  border-radius: 10px;
+  color: orange;
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 30px;
 }
 
 body {

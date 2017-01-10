@@ -98,12 +98,17 @@ map.append("path")
 //     map.selectAll('.state').attr('d', path);
 // }
 
+$("#country-name-title").append(`
+  <h2>Select a Country<h2>
+`)
+
 $(".current-country-data").append(`
   <section>
-    <h3>Click a Country to View Its Data</h3>
-    <p>
-      Once you've chosen a country, click on available cities. You will be able to view a Country's demographic information based on the <a href="https://www.cia.gov/library/publications/the-world-factbook/">CIA World Factbook.</a> Once you click on a country, you can view a respective city's "livability" ratings courtesty of <a href="https://nomadlist.com/">NomadList</a>.
+    <h3 id="instructions-title">Click a Country to View Its Data</h3>
+    <p id="instructions">
+      Once you've chosen a country, click on available cities. You will be able to view a Country's demographic information based on the <a href="https://www.cia.gov/library/publications/the-world-factbook/" target="_blank">CIA World Factbook.</a> Once you click on a country, you can view a respective city's "livability" ratings courtesty of <a href="https://nomadlist.com/" target="_blank">NomadList</a>.
     </p>
+  </sectin>
 `)
 
 $.ajax({
@@ -169,7 +174,7 @@ function ready(world, names) {
     // _______________________
     // Integrate CIA Factbook Data
               var databaseCountryID = $(this).attr("database-id")
-              $("#country-name-title").text("")
+
               $(".current-country-data").text("")
               // $(".current-country-data-2").text("")
               $.ajax({
@@ -224,8 +229,8 @@ function ready(world, names) {
                 return parseInt(d);
               });
               tooltip.classed("hidden", false)
-                .attr("style", "left:" + (mouse[0] + 15) +
-                  "px; top:" + (mouse[1] - 15) + "px")
+                .attr("style", "left:" + (mouse[0] + 175) +
+                  "px; top:" + (mouse[1] + 220) + "px")
                 .html(d.name);
             })
             .on("mouseout", function() {
@@ -245,42 +250,42 @@ function ready(world, names) {
       // console.log('databaseCountryID', databaseCountryID)
       if (clickedCountry.d3_id == databaseCountryID) {
         // $(".current-country-data").append(`<h1>HELLLLLLOOOOOOOOO</h1>`);
+        $("#country-name-title").text("")
         $("#country-name-title").append(`
           <h1>${clickedCountry.name}</h1>
           `)
 
-        $(".current-country-data-1").append(`
+        $(".current-country-data").append(`
           <section class="country-facts-countainer">
-            <h2>Capital: ${clickedCountry.capital}</h2>
-            <h3>Population: ${clickedCountry.population}</h3>
-            <h3>Government Type: ${clickedCountry.government_type}</h3>
-            <h3>Dual Citizenship: ${clickedCountry.dual_citizenship}</h3>
-            <h3>Residency Requirement: ${clickedCountry.residency_requirement}</h3>
-            <h5>Net Migration Rate: ${clickedCountry.net_migration_rate}</h5>
+            <h3 class="country-fact capital"><span class="fact-title">Capital:</span> ${clickedCountry.capital}</h2>
+            <h3 class="country-fact"><span class="fact-title">Population:</span> ${clickedCountry.population}</h3>
+            <h3 class="country-fact"><span class="fact-title">Languages:</span> ${clickedCountry.languages}</h3>
+            <fieldset>
+              <legend><span class="fact-title">Historical Background:</span></legend>
+              <textarea id="country-background">${clickedCountry.background}</textarea>
+            </fieldset>
+            <h3 class="country-fact"><span class="fact-title">Government Type:</span> ${clickedCountry.government_type}</h3>
+            <h3 class="country-fact"><span class="fact-title">Dual Citizenship:</span> ${clickedCountry.dual_citizenship == !undefined ? clickedCountry.dual_citizenship : "N/A"}</h3>
+            <h3 class="country-fact"><span class="fact-title">Residency Requirement:</span> ${clickedCountry.residency_requirement}</h3>
 
-            <h5>Urbanization: ${clickedCountry.urbanization}</h5>
-            <h3>GDP/Capita: ${clickedCountry.gdp_per_capita}</h3>
-            <h5>Unemployment_rate: ${clickedCountry.unemployment_rate}</h5>
-            <h5>Population Below Poverty Line: ${clickedCountry.population_below_poverty_line}</h5>
+            <h3 class="country-fact"><span class="fact-title">Urbanization:</span> ${clickedCountry.urbanization}</h3>
+            <h3 class="country-fact"><span class="fact-title">Net Migration Rate:</span> ${clickedCountry.net_migration_rate}</h3>
+            <h3 class="country-fact"><span class="fact-title">GDP/Capita:</span> ${clickedCountry.gdp_per_capita}</h3>
+            <h3 class="country-fact"><span class="fact-title">Unemployment_rate:</span> ${clickedCountry.unemployment_rate}</h3>
+            <h3 class="country-fact"><span class="fact-title">Population Below Poverty Line:</span> ${clickedCountry.population_below_poverty_line}</h3>
 
-            <h5>Age_structure: ${clickedCountry.Age_structure}</h5>
-            <h3>Median Age: ${clickedCountry.median_age}</h3>
-            <h3>Sex Ratio: ${clickedCountry.sex_ratio}</h3>
-            <h3>Languages: ${clickedCountry.languages}</h3>
-            <h3>Ethnic Breakdown: ${clickedCountry.ethnic_breakdown}</h3>
-            <h3>Religions: ${clickedCountry.religions}</h3>
+            <h3 class="country-fact"><span class="fact-title">Age_structure:</span> ${clickedCountry.Age_structure}</h3>
+            <h3 class="country-fact"><span class="fact-title">Median Age:</span> ${clickedCountry.median_age}</h3>
+            <h3 class="country-fact"><span class="fact-title">Sex Ratio:</span> ${clickedCountry.sex_ratio}</h3>
+            <h3 class="country-fact"><span class="fact-title">Ethnic Breakdown:</span> ${clickedCountry.ethnic_breakdown}</h3>
+            <h3 class="country-fact"><span class="fact-title">Religions:</span> ${clickedCountry.religions}</h3>
 
-            <h5>Climate: ${clickedCountry.climate}</h5>
-            <h5>Coastline: ${clickedCountry.coastline}</h5>
-            <h5>Environment: ${clickedCountry.environment}</h5>
-            <h5>Natural Resources: ${clickedCountry.natural_resources}</h5>
-            <label>
-            <h5>Exports: ${clickedCountry.exports}</h5>
-            </label>
+            <h3 class="country-fact"><span class="fact-title">Climate:</span> ${clickedCountry.climate}</h3>
+            <h3 class="country-fact"><span class="fact-title">Coastline:</span> ${clickedCountry.coastline}</h3>
+            <h3 class="country-fact"><span class="fact-title">Environment:</span> ${clickedCountry.environment}</h3>
+            <h3 class="country-fact"><span class="fact-title">Natural Resources:</span> ${clickedCountry.natural_resources}</h3>
+            <h3 class="country-fact"><span class="fact-title">Exports:</span> ${clickedCountry.exports}</h3>
 
-            <label>Historical Background:
-              <textarea>${clickedCountry.background}</textarea>
-            </label>
           </section>
         `)
       }
