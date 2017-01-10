@@ -54,6 +54,16 @@ class Country < ApplicationRecord
       sex_ratio: sex_ratio,
       capital: capital,
       dual_citizentship: dual_citizentship ,
+
+
+
+
+
+
+
+
+
+      
       residency_requirement: residency_requirement,
       government_type: government_type,
       gdp_per_capita: gdp_per_capita,
