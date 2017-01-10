@@ -38,6 +38,10 @@ header {
   flex-direction: column;
 }
 
+section.instructions-section {
+  padding-left: 10px;
+}
+
 h3#instructions-title {
   color: #fff;
   font-size: 24px;
@@ -123,7 +127,7 @@ a:hover, a:active {
 textarea#country-background {
   overflow-y: scroll;
   height: 100px;
-  width: 500px;
+  width: 450px;
   border-radius: 5px;
   border: none;
   background-color: rgba(0, 0, 0, 0.6);
@@ -233,11 +237,11 @@ div.tooltip {
     // font-size: 16px;
   }
   h3.country-fact {
-    max-width: 280px;
+    max-width: 260px;
   }
   textarea#country-background {
     // height: 100px;
-    width: 280px;
+    width: 260px;
     // border-radius: 5px;
   	// padding: 5px;
     // font-size: 14px;
