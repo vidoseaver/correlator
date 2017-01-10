@@ -8,7 +8,7 @@ RSpec.describe City, type: :model do
   end
   describe "class_methods" do
     context ".populate_cities" do
-      it "takes json from the NomadListService and populates the database with it" do
+      xit "takes json from the NomadListService and populates the database with it" do
         VCR.turned_off do
         	WebMock.allow_net_connect!
           raw_cities = NomadListService.new.all_cities[:result]
