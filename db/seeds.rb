@@ -13,3 +13,5 @@ Dir.glob("app/assets/factbook/**/*.json").each do |file_name|
 end
 
 Country.d3_code_assigner
+
+Country.find_by(name: "West Bank").update(d3_id: 275)

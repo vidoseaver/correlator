@@ -4,7 +4,8 @@ var width = 450,
 var colors = { clickable: "black", hover: "tomato", clicked: "orange", clickhover: "darkorange" };
 
 var projection = d3.geoOrthographic()
-  .scale(width / 2)
+  .scale(400)
+  // .scale(width / 2)
   .translate([width / 2, height / 2])
   .clipAngle(90)
   .precision(10);
@@ -31,9 +32,9 @@ map.append("defs")
   .attr("d", path);
 
 //APPENDS OUTER GLOBE BORDER
-// map.append("use")
-//   .attr("class", "stroke")
-//   .attr("xlink:href", "#sphere");
+map.append("use")
+  .attr("class", "stroke")
+  .attr("xlink:href", "#sphere");
 
 //APPENDS COLORING (OUTER-COUNTRY FILL)
 // map.append("use")
@@ -41,17 +42,17 @@ map.append("defs")
 //   .attr("xlink:href", "#sphere");
 
 // APPENDS GRIDLINES
-// map.append("path")
-//   .datum(graticule)
-//   .attr("class", "graticule")
-//   .attr("d", path);
+map.append("path")
+  .datum(graticule)
+  .attr("class", "graticule")
+  .attr("d", path);
 
 $("#country-name-title").append(`
   <h2>Select a Country<h2>
 `)
 
 $(".current-country-data").append(`
-  <section>
+  <section class="instructions-section">
     <h3 id="instructions-title">Click a Country to View Its Data</h3>
     <p id="instructions">
       Once you've chosen a country, click on available cities. You will be able to view a Country's demographic information based on the <a href="https://www.cia.gov/library/publications/the-world-factbook/" target="_blank">CIA World Factbook.</a> Once you click on a country, you can view a respective city's "livability" ratings courtesty of <a href="https://nomadlist.com/" target="_blank">NomadList</a>.
@@ -59,8 +60,8 @@ $(".current-country-data").append(`
   </sectin>
 `)
 
-var world_topo = "";
-var country_names = "";
+// var world_topo = "";
+// var country_names = "";
 
 $.ajax({
   method: "GET",
@@ -68,31 +69,31 @@ $.ajax({
   async: true,
   dataType: "json",
   success: function(world_data) {
-    world_topo = world_data[0];
-    country_names = world_data[1];
+    // world_topo = world_data[0];
+    // country_names = world_data[1];
     renderWorld(world_data[0], world_data[1])
   }
 })
 
 // __________
 
-$("#zoom-in").on("click", function() {
-  projection = d3.geoOrthographic()
-    .scale(400)
-    .translate([width / 2, height / 2])
-    .clipAngle(90)
-    .precision(10);
-  map.append("defs")
-    .append("path")
-    .datum({type: "Sphere"})
-    .attr("id", "sphere")
-    .attr("d", path);
-    console.log('hello')
-    // console.log(world_topo)
-    // console.log(country_names)
-
-  renderWorld(world_topo, country_names)
-})
+// $("#zoom-in").on("click", function() {
+//   projection = d3.geoOrthographic()
+//     .scale(400)
+//     .translate([width / 2, height / 2])
+//     .clipAngle(90)
+//     .precision(10);
+//   map.append("defs")
+//     .append("path")
+//     .datum({type: "Sphere"})
+//     .attr("id", "sphere")
+//     .attr("d", path);
+//     console.log('hello')
+//     // console.log(world_topo)
+//     // console.log(country_names)
+//
+//   renderWorld(world_topo, country_names)
+// })
 
 // $("#zoom-out").on("click", function() {
 //   projection = d3.geoOrthographic()
@@ -214,7 +215,7 @@ function renderWorld(world, names) {
         `)
 
         $(".current-country-data").append(`
-          <section class="country-facts-countainer">
+          <section class="country-facts-container">
             <h3 class="country-fact capital"><span class="fact-title">Capital:</span> ${clickedCountry.capital}</h2>
             <h3 class="country-fact"><span class="fact-title">Population:</span> ${clickedCountry.population}</h3>
             <h3 class="country-fact"><span class="fact-title">Languages:</span> ${clickedCountry.languages}</h3>
