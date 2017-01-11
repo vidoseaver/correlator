@@ -33,9 +33,9 @@ Then create and seed the database:
 
   Next, populate the cities curated from Nomadlist.com.
   
-    `rails console
+  ` rails console
     City.populate_cities
-    exit`
+    exit `
 
 To Run Test Suite:  
 
