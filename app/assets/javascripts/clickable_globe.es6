@@ -64,6 +64,8 @@ $.ajax({
   }
 })
 
+
+
 function renderWorld(world, names) {
   var world = JSON.parse(world)
   var names = d3.tsvParse(names)
@@ -116,7 +118,7 @@ function renderWorld(world, names) {
                 dataType: "json",
                 success: function(clickedCountryCities) {
                   console.log('clicked country ajax return data', clickedCountryCities)
-                  renderCityData(clickedCountryCities, databaseCountryID)
+                  renderCityDropDown(clickedCountryCities, databaseCountryID)
                 }
               })
 
@@ -210,25 +212,41 @@ function renderWorld(world, names) {
       }
     }
 
-    function renderCityData(clickedCountryCities, databaseCountryID) {
-      console.log('country d3 id', clickedCountryCities.d3_id)
-      console.log('databaseCountryID', clickedCountryCities.d3_id)
-      console.log('city liest', clickedCountryCities.city)
+    function renderCityDropDown(clickedCountryCities, databaseCountryID) {
+      $("#city-list").text("")
       var cityList = clickedCountryCities.map(function(city) {
-        console.log("memorable", city.id)
-        return (
-          `<option value=${city.id}> ${city.name} </option>`
-        )
+        return (`<option value=${city.id}> ${city.name} </option>`)
       })
-      // if (clickedCountryCities.id == databaseCountryID) {
         $("#city-list").append(`
-          <select class="city-name-container">
+          <select id="city-name-container">
+            <option value="default" selected>Select a City</option>
             ${cityList}
           </select>
         `)
-        //  ${clickedCountryCities.city}
       }
-    // }
+
+    $("#city-list").on('change', "#city-name-container", function() {
+      var cityId = this.value;
+      getCityData(cityId);
+    });
+
+    function getCityData(cityId) {
+      $.ajax({
+        method: "GET",
+        url: `/api/v1/cities/${cityId}`,
+        async: true,
+        dataType: "json",
+        success: function(cityData) {
+          console.log('clicked city ajax return data', cityData)
+          renderCityData(cityData)
+          debugger
+        }
+      })
+    }
+
+    function renderCityData(cityData) {
+
+    }
 
   map.insert("path", ".graticule")
     .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
