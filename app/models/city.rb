@@ -5,9 +5,12 @@ class City < ApplicationRecord
   def self.populate_cities
     all_cities = HerokuAppService.new.all_cities
     all_cities.map do |city|
+
+      country = Country.find_by(name: city[:country].gsub("-", " ").gsub("DR", "Democratic Republic of the"))
+      country = Country.create(name: "Palestine") if city[:country] == "Palestine"
       City.create_with(
         name:                              city[:name],
-        country_id:                        city[:scores][:country_id],
+        country_id:                        country.id,
         url:                               city[:scores][:url],
         nomad_score:                       city[:scores][:nomad_score],
         life_score:                        city[:scores][:life_score],
