@@ -27,11 +27,11 @@ class City < ApplicationRecord
         racism:                            city[:scores][:racism],
         lgbt_friendly:                     city[:scores][:lgbt_friendly],
         female_friendly:                   city[:scores][:female_friendly],
-        air_bnb_median_us:                 city[:scores][:airbnb_median],
-        cost_as_nomad_us:                  city[:scores][:nomad],
-        cost_longterm_us:                  city[:scores][:longTerm],
-        cost_shortterm_us:                 city[:scores][:shortTerm],
-        air_bnb_vs_appartment_price_ratio: city[:scores][:airbnb_vs_apartment_price_ratio])
+        air_bnb_median_us:                 city[:scores][:air_bnb_median_us],
+        cost_as_nomad_us:                  city[:scores][:cost_as_nomad_us].to_f,
+        cost_longterm_us:                  city[:scores][:cost_longterm_us].to_f,
+        cost_shortterm_us:                 city[:scores][:cost_shortterm_us].to_f,
+        air_bnb_vs_appartment_price_ratio: city[:scores][:air_bnb_vs_appartment_price_ratio])
         .find_or_create_by(id: city[:scores][:id])
     end
   end
