@@ -41,10 +41,6 @@ map.append("path")
   .attr("class", "graticule")
   .attr("d", path);
 
-// $("#country-name-title").append(`
-//   <h2>Select a Country<h2>
-// `)
-
 $(".current-country-data").append(`
   <section class="instructions-section">
     <h3 id="instructions-title">Click a Country to View Its Data</h3>
@@ -63,8 +59,6 @@ $.ajax({
     renderWorld(world_data[0], world_data[1])
   }
 })
-
-
 
 function renderWorld(world, names) {
   var world = JSON.parse(world)
@@ -97,10 +91,9 @@ function renderWorld(world, names) {
             .attr("world110-country-id", j)
             .attr("database-id", names[i].id)
             .on("click", function() {
-              var databaseCountryID = $(this).attr("database-id")
-              console.log('database-id', databaseCountryID)
-
               $(".current-country-data").text("")
+              var databaseCountryID = $(this).attr("database-id")
+
               $.ajax({
                 method: "GET",
                 url: `/api/v1/countries/${databaseCountryID}`,
@@ -170,88 +163,141 @@ function renderWorld(world, names) {
       }
     }
 
-    function renderCountryData(clickedCountry, databaseCountryID) {
-      if (clickedCountry.d3_id == databaseCountryID) {
-        $("#country-name-title").text("")
-        $("#country-name-title").append(`
-          <h1>${clickedCountry.name}</h1>
-        `)
+function renderCountryData(clickedCountry, databaseCountryID) {
+  if (clickedCountry.d3_id == databaseCountryID) {
+    $("#country-name-title").text("")
+    $("#country-name-title").append(`
+      <a href=""><h1>${clickedCountry.name}</h1></a>
+    `)
 
-        $(".current-country-data").append(`
-          <section class="country-facts-container">
-            <h3 class="country-fact capital"><span class="fact-title">Capital:</span> ${clickedCountry.capital}</h3>
-            <h3 class="country-fact"><span class="fact-title">Population:</span> ${clickedCountry.population}</h3>
-            <h3 class="country-fact"><span class="fact-title">Languages:</span> ${clickedCountry.languages}</h3>
-            <fieldset>
-              <legend><span class="fact-title h-background-title">Historical Background:</span></legend>
-              <textarea readonly id="country-background">${clickedCountry.background}</textarea>
-            </fieldset>
-            <h3 class="country-fact"><span class="fact-title">Government Type:</span> ${clickedCountry.government_type}</h3>
-            <h3 class="country-fact"><span class="fact-title">Dual Citizenship:</span> ${clickedCountry.dual_citizenship == !undefined ? clickedCountry.dual_citizenship : "N/A"}</h3>
-            <h3 class="country-fact"><span class="fact-title">Residency Requirement:</span> ${clickedCountry.residency_requirement}</h3>
+    $(".current-country-data").append(`
+      <section class="country-facts-container">
+        <h3 class="country-fact capital"><span class="country-fact-key">Capital:</span> ${clickedCountry.capital}</h3>
+        <h3 class="country-fact"><span class="country-fact-key">Population:</span> ${clickedCountry.population}</h3>
+        <h3 class="country-fact"><span class="country-fact-key">Languages:</span> ${clickedCountry.languages}</h3>
+        <fieldset>
+          <legend><span class="country-fact-key h-background-key">Historical Background:</span></legend>
+          <textarea readonly id="country-background">${clickedCountry.background}</textarea>
+        </fieldset>
+        <h3 class="country-fact"><span class="country-fact-key">Government Type:</span> ${clickedCountry.government_type}</h3>
+        <h3 class="country-fact"><span class="country-fact-key">Dual Citizenship:</span> ${clickedCountry.dual_citizenship == !undefined ? clickedCountry.dual_citizenship : "N/A"}</h3>
+        <h3 class="country-fact"><span class="country-fact-key">Residency Requirement:</span> ${clickedCountry.residency_requirement}</h3>
 
-            <h3 class="country-fact"><span class="fact-title">Urbanization:</span> ${clickedCountry.urbanization}</h3>
-            <h3 class="country-fact"><span class="fact-title">Net Migration Rate:</span> ${clickedCountry.net_migration_rate}</h3>
-            <h3 class="country-fact"><span class="fact-title">GDP/Capita:</span> ${clickedCountry.gdp_per_capita}</h3>
-            <h3 class="country-fact"><span class="fact-title">Unemployment_rate:</span> ${clickedCountry.unemployment_rate}</h3>
-            <h3 class="country-fact"><span class="fact-title">Population Below Poverty Line:</span> ${clickedCountry.population_below_poverty_line}</h3>
+        <h3 class="country-fact"><span class="country-fact-key">Urbanization:</span> ${clickedCountry.urbanization}</h3>
+        <h3 class="country-fact"><span class="country-fact-key">Net Migration Rate:</span> ${clickedCountry.net_migration_rate}</h3>
+        <h3 class="country-fact"><span class="country-fact-key">GDP/Capita:</span> ${clickedCountry.gdp_per_capita}</h3>
+        <h3 class="country-fact"><span class="country-fact-key">Unemployment_rate:</span> ${clickedCountry.unemployment_rate}</h3>
+        <h3 class="country-fact"><span class="country-fact-key">Population Below Poverty Line:</span> ${clickedCountry.population_below_poverty_line}</h3>
 
-            <h3 class="country-fact"><span class="fact-title">Median Age:</span> ${clickedCountry.median_age}</h3>
-            <h3 class="country-fact"><span class="fact-title">Sex Ratio:</span> ${clickedCountry.sex_ratio}</h3>
-            <h3 class="country-fact"><span class="fact-title">Ethnic Breakdown:</span> ${clickedCountry.ethnic_breakdown}</h3>
-            <h3 class="country-fact"><span class="fact-title">Religions:</span> ${clickedCountry.religions}</h3>
+        <h3 class="country-fact"><span class="country-fact-key">Median Age:</span> ${clickedCountry.median_age}</h3>
+        <h3 class="country-fact"><span class="country-fact-key">Sex Ratio:</span> ${clickedCountry.sex_ratio}</h3>
+        <h3 class="country-fact"><span class="country-fact-key">Ethnic Breakdown:</span> ${clickedCountry.ethnic_breakdown}</h3>
+        <h3 class="country-fact"><span class="country-fact-key">Religions:</span> ${clickedCountry.religions}</h3>
 
-            <h3 class="country-fact"><span class="fact-title">Climate:</span> ${clickedCountry.climate}</h3>
-            <h3 class="country-fact"><span class="fact-title">Coastline:</span> ${clickedCountry.coastline}</h3>
-            <h3 class="country-fact"><span class="fact-title">Environment:</span> ${clickedCountry.environment}</h3>
-            <h3 class="country-fact"><span class="fact-title">Natural Resources:</span> ${clickedCountry.natural_resources}</h3>
-            <h3 class="country-fact"><span class="fact-title">Exports:</span> ${clickedCountry.exports}</h3>
+        <h3 class="country-fact"><span class="country-fact-key">Climate:</span> ${clickedCountry.climate}</h3>
+        <h3 class="country-fact"><span class="country-fact-key">Coastline:</span> ${clickedCountry.coastline}</h3>
+        <h3 class="country-fact"><span class="country-fact-key">Environment:</span> ${clickedCountry.environment}</h3>
+        <h3 class="country-fact"><span class="country-fact-key">Natural Resources:</span> ${clickedCountry.natural_resources}</h3>
+        <h3 class="country-fact"><span class="country-fact-key">Exports:</span> ${clickedCountry.exports}</h3>
 
-          </section>
-        `)
-      }
+      </section>
+    `)
+  }
+}
+
+function renderCityDropDown(clickedCountryCities, databaseCountryID) {
+  $("#city-list").text("")
+  var cityList = clickedCountryCities.map(function(city) {
+    return (`<option value=${city.id}> ${city.name} </option>`)
+  })
+    $("#city-list").append(`
+      <select id="city-name-container">
+        <option value="default" selected>Select a City</option>
+        ${cityList}
+      </select>
+    `)
+  }
+
+$("#city-list").on('change', "#city-name-container", function() {
+  var cityId = this.value;
+  getCityData(cityId);
+});
+
+function getCityData(cityId) {
+  $.ajax({
+    method: "GET",
+    url: `/api/v1/cities/${cityId}`,
+    async: true,
+    dataType: "json",
+    success: function(cityData) {
+      console.log('clicked city ajax return data', cityData)
+      renderCityData(cityData)
     }
+  })
+}
 
-    function renderCityDropDown(clickedCountryCities, databaseCountryID) {
-      $("#city-list").text("")
-      var cityList = clickedCountryCities.map(function(city) {
-        return (`<option value=${city.id}> ${city.name} </option>`)
-      })
-        $("#city-list").append(`
-          <select id="city-name-container">
-            <option value="default" selected>Select a City</option>
-            ${cityList}
-          </select>
-        `)
-      }
+function renderCityData(cityData) {
+  $(".current-country-data").text("");
+  $(".current-country-data").append(`
+    <section class="city-facts-container">
+      <h3 class="city-fact city"><span class="city-fact-key">Name:</span> ${cityData.name}</h3>
+      <h3 class="city-fact"><span class="city-fact-key">Cost as Nomad/Mo:</span> &#36 ${cityData.cost_as_nomad_us}</h3>
+      <h3 class="city-fact"><span class="city-fact-key">Cost in ShortTerm/Mo:</span> &#36 ${cityData.cost_shortterm_us}</h3>
+      <h3 class="city-fact"><span class="city-fact-key">Cost in Longterm/Mo:</span> &#36 ${cityData.cost_longterm_us}</h3>
+      <h3 class="city-fact"><span class="city-fact-key">Cost (Median) of Air BnB:</span> &#36 ${cityData.air_bnb_median_us}</h3>
+      <h3 class="city-fact"><span class="city-fact-key">Air BnB vs Apartment Price Ratio:</span> ${cityData.air_bnb_vs_appartment_price_ratio}</h3>
+    </section>
+  `)
+  var dataArr = [5, 20, 50, 60]
+  var width = 300
+  var height = 300
 
-    $("#city-list").on('change', "#city-name-container", function() {
-      var cityId = this.value;
-      getCityData(cityId);
-    });
+  // var widthScale = d3.scale.linear()
+  var widthScale = d3.scaleLinear()
+    .domain([0, 80]) //smallest, largest value in data set
+    .range([0, width]);
 
-    function getCityData(cityId) {
-      $.ajax({
-        method: "GET",
-        url: `/api/v1/cities/${cityId}`,
-        async: true,
-        dataType: "json",
-        success: function(cityData) {
-          console.log('clicked city ajax return data', cityData)
-          renderCityData(cityData)
-          debugger
-        }
-      })
-    }
+  var color = d3.scaleLinear()
+    .domain([0, 60])
+    .range(["red", "blue"])
 
-    function renderCityData(cityData) {
+  // var axis = d3.svg.axis()
+  var axis = d3.axisBottom()
+    .tickArguments(3) //specifies how many ticks on scale show up
+    .tickSize(10)
+    .scale(widthScale);
 
-    }
+  var canvas = d3.select(".current-country-data")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .append("g")
+    .attr("transform", "translate(20, 20)")
+    // .call(axis) // call the axis to render
 
-  map.insert("path", ".graticule")
-    .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
-    .attr("class", "boundary")
-    .attr("d", path);
+  var bars = canvas.selectAll("rect")
+    .data(dataArr)
+    .enter() //contains placeholders for each data point where there are non DOM elements (aka, returns 3 placeholders)
+    .append("rect")
+    .attr("width", function(d) { return widthScale(d); })
+    .attr("height", 30)
+    .attr("fill", function(d) { return color(d); })
+    .attr("y", function(d, i) { return i * 40; })
+
+  canvas.append("g")
+    .attr("transform", "translate(0, 160)")
+    .call(axis)
+  }
+
+
+
+
+
+
+map.insert("path", ".graticule")
+  .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
+  .attr("class", "boundary")
+  .attr("d", path);
 };
 
 d3.select(self.frameElement).style("height", height + "px");

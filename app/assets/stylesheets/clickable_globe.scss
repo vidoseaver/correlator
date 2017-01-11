@@ -94,12 +94,34 @@ h3.capital.country-fact {
   color: orange;
 }
 
-span.fact-title {
+span.country-fact-key {
   color: tomato;
   font-family: 'saxmono';
   font-size: 18px;
   // margin: 7px;
 }
+
+// ______________
+
+h3.city-fact {
+  margin: 7px;
+  max-width: 500px;
+  color: #d2cdcd;
+  font-family: 'Hack-Regular';
+}
+
+h3.city.city-fact {
+  font-size: 20px;
+  color: tomato;
+}
+
+span.city-fact-key {
+  color: orange;
+  font-family: 'saxmono';
+  font-size: 18px;
+  // margin: 7px;
+}
+// _____________
 
 .h-background-title {
   margin: 7px;
