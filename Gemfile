@@ -72,6 +72,7 @@ group :development, :test do
   #keep it clean
   gem 'table_print'
   #pretty print tables
+  gem 'mocha'
   gem 'teaspoon-mocha'
 end
 

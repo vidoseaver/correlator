@@ -4,7 +4,6 @@ class City < ApplicationRecord
 
   def self.populate_cities
     all_cities = HerokuAppService.new.all_cities
-    binding.pry
     all_cities.map do |city|
       City.create_with(
         name:                              city[:name],

@@ -1,27 +1,31 @@
 # To run any example or example group through Selenium, just set :js => true:
+require 'rubygems'
 require "rails_helper"
 require "selenium-webdriver"
 
 describe 'home page' do
+  # it 'shows title and subtitle when visiting home page', js: :selenium do
   it 'shows title and subtitle when visiting home page', :js => true do
-    # visit root_path
+    driver = Selenium::WebDriver.for :chrome
+
+    # driver.get 'http://google.com'
+    # driver.navigate.to 'http://google.com'
     site_url = "localhost:3000/}"
-    driver.navigate.to(site_url + "/locators.html")
+    # driver.navigate.to(site_url)
+    # visit root_path
     # fill_in 'Author', :with => 'J. Random Hacker'
     # fill_in 'Comment', :with => 'Awesome post!'
     # click_on 'Submit'  # this be an Ajax button -- requires Selenium
-    page.should have_content('World Data Correlator')
-    page.should have_content('View Country and City Travel Information World-Wide')
-  end
-  it 'has an world-globe svg element upon visiting home page', :js => true do
-    visit root_path
+
+    expect(driver.find_element(:id, "country-name-title").tag_name).to eq("Seclect a Country")
     # page.should have_content('World Data Correlator')
-    # page.should have_content('View Country and City Travel Information World-Wide')
+    # page.should have_content('Select a Country')
   end
-  it 'has an world-globe svg element upon visiting home page', :js => true do
+  it 'has an world-globe svg element upon visiting home page', js: true do
     visit root_path
-    page.should have_content('World Data Correlator')
-    page.should have_content('View Country and City Travel Information World-Wide')
+  end
+  it 'has an world-globe svg element upon visiting home page', js: true do
+    visit root_path
   end
 end
 

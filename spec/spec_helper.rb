@@ -5,8 +5,39 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 
-require 'capybara/rspec'
-require 'capybara/rails'
+# require 'capybara/rspec'
+# require 'capybara/rails'
+RSpec.configure do |config|
+  require 'database_cleaner'
+  require 'capybara/rspec'
+
+  config.include Rails.application.routes.url_helpers
+  config.include Capybara::DSL
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do |example|
+    DatabaseCleaner.strategy = example.metadata[:js] ? :truncation : :transaction
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+end
+
+# def select_driver
+#   if example.metadata[:js]
+#     if example.metadata[:js] == :selenium
+#       :selenium
+#     else
+#       :webkit
+#     end
+#   else
+#     Capybara.default_driver
+#   end
+# end
 
 SimpleCov.start do
     add_filter "/spec/"
