@@ -21,7 +21,7 @@ class City < ApplicationRecord
         nightlife:                         city[:scores][:nightlife],
         leisure:                           city[:scores][:leisure],
         places_to_work:                    city[:scores][:places_to_work],
-        air_con:                           city[:scores][:aircon],
+        air_con:                           city[:scores][:air_con],
         safety:                            city[:scores][:safety],
         friendly_to_foreigners:            city[:scores][:friendly_to_foreigners],
         racism:                            city[:scores][:racism],
