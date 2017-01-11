@@ -1,17 +1,8 @@
-## Project Name & Pitch
+## Correlator
 
-#### Example:
 
-TweetWorld 
 
-An application used to filter data form Twitter based on user preference, built with React, Redux, JavaScript, and CSS.
-
-## Project Status
-(only necessary if incomplete)
-
-#### Example:
-
-This project is currently in development. Users can filter tweets by username and keyword and see visual data representation. Functionality to sort by additional parameters is in progress.
+An application display data about cities and countries relative to travelers built with Rails - with a POSTGRESQL database -, D3.js, JavaScript, and CSS.
 
 ## Project Screen Shot(s)
 
@@ -25,34 +16,51 @@ This project is currently in development. Users can filter tweets by username an
 
 #### Example:  
 
-Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
+Clone down this repository. You will need Ruby and installed globally on your machine.  
 
 Installation:
+  In console enter
+  
+  `bundle`
 
-`npm install`  
+Then create and seed the database:
+
+  In console enter:
+  
+  `rake db:{create, migrate, seed}`
+
+  This will populate the countries from Cia World Factbook data stored locally.
+
+  Next, populate the cities curated from Nomadlist.com.
+    `rails console
+    City.populate_cities
+    exit`
 
 To Run Test Suite:  
 
-`npm test`  
+`rspec`
+ 
 
 To Start Server:
 
-`npm start`  
+`rails s`  
 
 To Visit App:
 
-`localhost:3000/ideas`  
+`localhost:3000`  
 
-## Reflection
+## Reflection 
+#### Vido's reflection
+  This was our two week long personal project during my Third Module at Turing School of Software and Design.  The goal was to explore area's of interest.  
 
-  - What was the context for this project? (ie: was this a side project? was this for Turing? was this for an experiment?)
-  - What did you set out to build?
-  - Why was this project challenging and therefore a really good learning experience?
-  - What were some unexpected obstacles?
-  - What tools did you use to implement this project?
-      - This might seem obvious because you are IN this codebase, but to all other humans now is the time to talk about why you chose webpack instead of create react app, or D3, or vanilla JS instead of a framework etc. Brag about your choices and justify them here.  
+  I (@vidoseaver) reached out to @kswhyte who is also enrolled at in Turing but in the front end program. He too had a personal project due and so we decided to collaborate. I was aqire the data and server the data for him to present with D3 and ES6.
 
-#### Example:  
+  Working with him came with its own set of challenges. From setting up a devopement enviorment to incorperating ES6 and SASS in a rails project. 
+  
+  To Further complications the Nomadlist api changed twice over the course of two weeks and ultimately stopped servering alot of the information we were interested in.  Luckily we had saved it on our heroku server but that made remote database changes especially scary. 
+  
+  Mapping the data was interesting as well. Ultimately while exhausting it was a great learning experience. Between having a fragile legacy database, dealing with inconsitent data and different coding enviorments . I think this project probably modeled alot of challenges that one comes across on the job.
+
 
 This was a 3 week long project built during my third module at Turing School of Software and Design. Project goals included using technologies learned up until this point and familiarizing myself with documentation for new features.  
 
