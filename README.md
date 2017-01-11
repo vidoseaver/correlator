@@ -32,6 +32,7 @@ Then create and seed the database:
   This will populate the countries from Cia World Factbook data stored locally.
 
   Next, populate the cities curated from Nomadlist.com.
+  
     `rails console
     City.populate_cities
     exit`
