@@ -5,8 +5,8 @@ class Api::V1::CitiesController < ApplicationController
   end
 
   def show
-    city = City.find(city_params)
-    render json: city
+    @city = City.find(city_params)
+    render json: @city, serializer: Api::V1::ShowCitySerializer
   end
 
   private

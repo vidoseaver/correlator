@@ -52,6 +52,14 @@ h1#app-title {
   //   blink-caret .75s step-end infinite;
 }
 
+.country-title-and-city {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
 div#country-name-title {
   font-family: 'BPmono';
   // width: 350px;
@@ -62,6 +70,10 @@ div#country-name-title {
   animation:
     typing 3.5s steps(40, end),
     // blink-caret .75s step-end infinite;
+}
+
+article#city-list {
+  margin: 20px auto;
 }
 
 /* The typing effect */

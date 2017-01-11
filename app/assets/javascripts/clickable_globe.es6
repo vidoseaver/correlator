@@ -108,16 +108,17 @@ function renderWorld(world, names) {
                   renderCountryData(clickedCountry, databaseCountryID)
                 }
               })
-              // $.ajax({
-              //   method: "GET",
-              //   url: `/api/v1/country_cities/${databaseCountryID}`,
-              //   async: true,
-              //   dataType: "json",
-              //   success: function(clickedCountryCities) {
-              //     console.log('clicked country ajax return data', clickedCountryCities)
-              //     renderCityData(clickedCountryCities, databaseCountryID)
-              //   }
-              // })
+
+              $.ajax({
+                method: "GET",
+                url: `/api/v1/country_cities/${databaseCountryID}`,
+                async: true,
+                dataType: "json",
+                success: function(clickedCountryCities) {
+                  console.log('clicked country ajax return data', clickedCountryCities)
+                  renderCityData(clickedCountryCities, databaseCountryID)
+                }
+              })
 
               d3.selectAll(".clicked")
                 .classed("clicked", false)
@@ -209,17 +210,24 @@ function renderWorld(world, names) {
       }
     }
 
-    // function renderCityData(clickedCountryCities, databaseCountryID) {
-    //   console.log('country d3 id', clickedCountryCities.d3_id)
-    //   console.log('databaseCountryID', clickedCountryCities.d3_id)
-    //   console.log('city liest', clickedCountryCities.city)
-    //   if (clickedCountryCities.d3_id == databaseCountryID) {
-    //     $(".current-country-data").append(`
-    //       <section class="city-name-container">
-    //         <h3 class="city-name-list"><span class="city-title">Cities:</span></h2>
-    //     `)
-    //     //  ${clickedCountryCities.city}
-    //   }
+    function renderCityData(clickedCountryCities, databaseCountryID) {
+      console.log('country d3 id', clickedCountryCities.d3_id)
+      console.log('databaseCountryID', clickedCountryCities.d3_id)
+      console.log('city liest', clickedCountryCities.city)
+      var cityList = clickedCountryCities.map(function(city) {
+        console.log("memorable", city.id)
+        return (
+          `<option value=${city.id}> ${city.name} </option>`
+        )
+      })
+      // if (clickedCountryCities.id == databaseCountryID) {
+        $("#city-list").append(`
+          <select class="city-name-container">
+            ${cityList}
+          </select>
+        `)
+        //  ${clickedCountryCities.city}
+      }
     // }
 
   map.insert("path", ".graticule")

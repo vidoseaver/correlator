@@ -1,17 +1,8 @@
-## Project Name & Pitch
+## Correlator
 
-#### Example:
 
-TweetWorld 
 
-An application used to filter data form Twitter based on user preference, built with React, Redux, JavaScript, and CSS.
-
-## Project Status
-(only necessary if incomplete)
-
-#### Example:
-
-This project is currently in development. Users can filter tweets by username and keyword and see visual data representation. Functionality to sort by additional parameters is in progress.
+An application display data about cities and countries relative to travelers built with Rails - with a POSTGRESQL database -, D3.js, JavaScript, and CSS.
 
 ## Project Screen Shot(s)
 
@@ -25,32 +16,46 @@ This project is currently in development. Users can filter tweets by username an
 
 #### Example:  
 
-Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
+Clone down this repository. You will need Ruby and installed globally on your machine.  
 
 Installation:
+  In console enter
 
-`npm install`  
+  `bundle`
+
+Then create and seed the database:
+
+  In console enter:
+
+  `rake db:{create, migrate, seed}`
+
+  This will populate the countries from Cia World Factbook data stored locally.
+
+  Next, populate the cities curated from Nomadlist.com.
+    `rails console
+    City.populate_cities
+    exit`
 
 To Run Test Suite:  
 
-`npm test`  
+`rspec`
+
 
 To Start Server:
 
-`npm start`  
+`rails s`  
 
 To Visit App:
 
-`localhost:3000/ideas`  
+`localhost:3000`  
 
 ## Reflection
 
-  - What was the context for this project? (ie: was this a side project? was this for Turing? was this for an experiment?)
-  - What did you set out to build?
-  - Why was this project challenging and therefore a really good learning experience?
-  - What were some unexpected obstacles?
-  - What tools did you use to implement this project?
-      - This might seem obvious because you are IN this codebase, but to all other humans now is the time to talk about why you chose webpack instead of create react app, or D3, or vanilla JS instead of a framework etc. Brag about your choices and justify them here.  
+  This was our two week long personal project during my Third Module at Turing School of Software and Design.  The goal was to explore area's of interest.  
+
+  I (@vidoseaver) reached out to @kswhyte who is also enrolled at in Turing but in the front end program. He too had a personal project due and so we decided to collaborate. I was aqire the data and server the data for him to present with D3 and ES6.
+
+  Working with him came with its own set of challenges. From setting up a devopement enviorment to incorperating ES6 and SASS.
 
 #### Example:  
 
@@ -62,3 +67,7 @@ One of the main challenges I ran into was Authentication. This lead me to spend 
 
 At the end of the day, the technologies implemented in this project are React, React-Router 4.0, Redux, LoDash, D3, and a significant amount of VanillaJS, JSX, and CSS. I chose to use the `create-react-app` boilerplate to minimize initial setup and invest more time in diving into weird technological rabbit holes. In the next iteration I plan on handrolling a `webpack.config.js` file to more fully understand the build process.  
 Add Comment Collapse
+
+### API documentation
+
+#### 
