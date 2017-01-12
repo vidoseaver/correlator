@@ -103,6 +103,26 @@ span.country-fact-key {
 
 // ______________
 
+.select-box select, .city-name-container, option {
+  background-color: rgba(0, 0, 0, 0.6);
+  background-repeat: no-repeat;
+  font-family: 'Hack-Regular';
+  color: #d2cdcd;
+  // width: 150px;
+  border: none;
+  padding: 5px 15px 5px 5px;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 5px;
+  height: 34px;
+  outline: none;
+  text-align: center;
+}
+
+select:hover {
+  color: #7399fa;
+}
+
 h3.city-fact {
   margin: 7px;
   max-width: 500px;
@@ -162,10 +182,24 @@ textarea#country-background {
   outline: none;
 }
 
-#donut-chart, #bar-chart, #bubble-chart {
+.bar-graph {
   @include containerDisplay;
   margin: auto;
+  width: 480px;
+  height: 400px;
 }
+//
+// // .bar-graph {
+// //   stroke: white;
+// // }
+//
+// .bar-graph text {
+//   fill: white;
+// }
+//
+// .bar-graph text.name {
+//   fill: #000;
+// }
 
 div.hidden {
   display: none;

@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require plotly
 //= require d3
 //= require lodash
 //= require_tree .
