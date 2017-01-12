@@ -18,6 +18,5 @@ describe "CountryCities country endpoint", type: :request do
     expect(json.second[:id]).to eq(city_2.id)
     expect(json.second[:name]).to eq(city_2.name)
     expect(json.second[:slug]).to eq(city_2.slug)
-
   end
 end

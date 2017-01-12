@@ -256,14 +256,13 @@ function renderCityData(cityData) {
 
   var data = [{
     type: "bar",
-    x: cityData.city_scores_arrayed,
-    y: cityData.names_arrayed,
+    x: cityData.city_scores_arrayed.reverse(),
+    y: cityData.names_arrayed.reverse(),
     orientation: "h"
   }]
 
   var layout = {
     title: 'Nomad Scores',
-    // margin: {t: 20},
     width: 550,
     height: 400,
     font: {
