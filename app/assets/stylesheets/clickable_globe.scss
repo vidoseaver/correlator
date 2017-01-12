@@ -65,13 +65,11 @@ p#instructions {
 }
 
 #country_info_container {
-  // @include containerDisplay;
   text-align: left;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
   flex-direction: column;
-  // background-color: rgba(0, 0, 0, 0.8);
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 20px;
   width: 600px;
@@ -81,7 +79,6 @@ p#instructions {
 }
 
 .current-country-data {
-  // overflow-y: scroll;
   line-height: 22px;
   font-size: 16px;
 }
@@ -127,6 +124,10 @@ select:hover {
   color: #7399fa;
 }
 
+.map {
+  margin: 0 60px;
+}
+
 h3.city-fact {
   margin: 7px;
   max-width: 500px;
@@ -143,7 +144,6 @@ span.city-fact-key {
   color: orange;
   font-family: 'saxmono';
   font-size: 18px;
-  // margin: 7px;
 }
 // _____________
 
@@ -186,32 +186,6 @@ textarea#country-background {
   outline: none;
 }
 
-// .bar-graph {
-//   @include containerDisplay;
-//   margin: auto;
-//   width: 480px;
-//   height: 400px;
-// }
-
-// div.svg-container {
-//   // background-color: black;
-//
-//   width: 480px;
-//   height: 400px;
-// }
-//
-// // .bar-graph {
-// //   stroke: white;
-// // }
-//
-// .bar-graph text {
-//   fill: white;
-// }
-//
-// .bar-graph text.name {
-//   fill: #000;
-// }
-
 div.hidden {
   display: none;
 }
@@ -253,7 +227,16 @@ div.tooltip {
   stroke-width: .5px;
 }
 
+@media (max-width: 1300) {
+  .map {
+    margin: 0 50px;
+  }
+}
+
 @media (max-width: 1200) {
+  .map {
+    margin: 0 40px;
+  }
   .globe-and-data-container {
     // justify-content: space-around;
     // flex-direction: row;
@@ -286,6 +269,9 @@ div.tooltip {
 }
 
 @media (max-width: 1000) {
+  .map {
+    margin: 0 30px 0 20px;
+  }
   .globe-and-data-container {
     // justify-content: space-around;
     // flex-direction: row;
