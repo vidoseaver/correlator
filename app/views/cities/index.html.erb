@@ -26,6 +26,7 @@
 
       <section id="country_info_container">
         <article class="current-country-data"></article>
+        <div id="bar-graph"></div>
       </section>
     </section>
 
@@ -33,17 +34,12 @@
       <article class="current-country-cities"></article>
     </section>
 
-    <section>
-      <div id="donut-chart"></div>
-      <div id="bar-chart"></div>
-      <div id="bubble-chart"></div>
-    </section>
-
     <%= javascript_tag do %>
     <% end %>
 
     <script src="//d3js.org/topojson.v1.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <%= javascript_include_tag "plotly-latest.min.js" %>
     <%= javascript_include_tag "clickable_globe.js" %>
   </body>
 </html>

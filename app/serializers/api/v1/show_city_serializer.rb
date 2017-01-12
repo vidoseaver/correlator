@@ -6,6 +6,6 @@ class Api::V1::ShowCitySerializer < ActiveModel::Serializer
   end
 
   def names_arrayed
-    ["Nomad Score", "Life Score", "Free Wifi Available", "Peace Score", "Freedom Score",  "Nightlife", "Leisre", "Places to Work", "Safety", "Friendly to Foreigners", "Racism", "LGBT Friendly", "Female Friendly"]
+    ["Nomad Score", "Life Score", "Free Wifi Available", "Peace Score", "Freedom Score",  "Nightlife", "Leisure", "Places to Work", "Safety", "Friendly to Foreigners", "Racism", "LGBT Friendly", "Female Friendly"]
   end
 end

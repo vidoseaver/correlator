@@ -65,8 +65,11 @@ p#instructions {
 }
 
 #country_info_container {
-  @include containerDisplay;
-  margin: 0 0 0 20px;
+  // @include containerDisplay;
+  text-align: left;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
   flex-direction: column;
   // background-color: rgba(0, 0, 0, 0.8);
   background-color: rgba(0, 0, 0, 0.6);
@@ -74,10 +77,11 @@ p#instructions {
   width: 600px;
   height: 430px;
   padding: 20px;
+  overflow-y: scroll;
 }
 
 .current-country-data {
-  overflow-y: scroll;
+  // overflow-y: scroll;
   line-height: 22px;
   font-size: 16px;
 }
@@ -102,6 +106,26 @@ span.country-fact-key {
 }
 
 // ______________
+
+.select-box select, .city-name-container, option {
+  background-color: rgba(0, 0, 0, 0.6);
+  background-repeat: no-repeat;
+  font-family: 'Hack-Regular';
+  color: #d2cdcd;
+  // width: 150px;
+  border: none;
+  padding: 5px 15px 5px 5px;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 5px;
+  height: 34px;
+  outline: none;
+  text-align: center;
+}
+
+select:hover {
+  color: #7399fa;
+}
 
 h3.city-fact {
   margin: 7px;
@@ -162,10 +186,31 @@ textarea#country-background {
   outline: none;
 }
 
-#donut-chart, #bar-chart, #bubble-chart {
-  @include containerDisplay;
-  margin: auto;
-}
+// .bar-graph {
+//   @include containerDisplay;
+//   margin: auto;
+//   width: 480px;
+//   height: 400px;
+// }
+
+// div.svg-container {
+//   // background-color: black;
+//
+//   width: 480px;
+//   height: 400px;
+// }
+//
+// // .bar-graph {
+// //   stroke: white;
+// // }
+//
+// .bar-graph text {
+//   fill: white;
+// }
+//
+// .bar-graph text.name {
+//   fill: #000;
+// }
 
 div.hidden {
   display: none;

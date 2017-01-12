@@ -92,6 +92,7 @@ function renderWorld(world, names) {
             .attr("database-id", names[i].id)
             .on("click", function() {
               $(".current-country-data").text("")
+              $("#bar-graph").text("")
               var databaseCountryID = $(this).attr("database-id")
 
               $.ajax({
@@ -148,7 +149,7 @@ function renderWorld(world, names) {
               });
               tooltip.classed("hidden", false)
                 .attr("style", "left:" + (mouse[0] - 11) +
-                  "px; top:" + (mouse[1] + 260) + "px")
+                  "px; top:" + (mouse[1] + 290) + "px")
                 .html(d.name);
             })
             .on("mouseout", function() {
@@ -167,7 +168,7 @@ function renderCountryData(clickedCountry, databaseCountryID) {
   if (clickedCountry.d3_id == databaseCountryID) {
     $("#country-name-title").text("")
     $("#country-name-title").append(`
-      <a href=""><h1>${clickedCountry.name}</h1></a>
+      <h1>${clickedCountry.name}</h1>
     `)
 
     $(".current-country-data").append(`
@@ -211,10 +212,12 @@ function renderCityDropDown(clickedCountryCities, databaseCountryID) {
     return (`<option value=${city.id}> ${city.name} </option>`)
   })
     $("#city-list").append(`
-      <select id="city-name-container">
-        <option value="default" selected>Select a City</option>
-        ${cityList}
-      </select>
+      <div class="select-box">
+        <select id="city-name-container">
+          <option value="default" selected>Select a City</option>
+          ${cityList}
+        </select>
+      </div>
     `)
   }
 
@@ -246,53 +249,49 @@ function renderCityData(cityData) {
       <h3 class="city-fact"><span class="city-fact-key">Cost in Longterm/Mo:</span> &#36 ${cityData.cost_longterm_us}</h3>
       <h3 class="city-fact"><span class="city-fact-key">Cost (Median) of Air BnB:</span> &#36 ${cityData.air_bnb_median_us}</h3>
       <h3 class="city-fact"><span class="city-fact-key">Air BnB vs Apartment Price Ratio:</span> ${cityData.air_bnb_vs_appartment_price_ratio}</h3>
+      <h3 class="city-fact"><span class="city-fact-key">Fragile States Index:</span> ${cityData.fragile_states_index}</h3>
+      <h3 class="city-fact"><span class="city-fact-key">Press Freedom Index:</span> ${cityData.press_freedom_index}</h3>
     </section>
   `)
-  var dataArr = [5, 20, 50, 60]
-  var width = 300
-  var height = 300
 
-  // var widthScale = d3.scale.linear()
-  var widthScale = d3.scaleLinear()
-    .domain([0, 80]) //smallest, largest value in data set
-    .range([0, width]);
+  var data = [{
+    type: "bar",
+    x: cityData.city_scores_arrayed,
+    y: cityData.names_arrayed,
+    orientation: "h"
+  }]
 
-  var color = d3.scaleLinear()
-    .domain([0, 60])
-    .range(["red", "blue"])
+  var layout = {
+    title: 'Nomad Scores',
+    // margin: {t: 20},
+    width: 550,
+    height: 400,
+    font: {
+      family: 'Droid Sans, monospace',
+      size: 14,
+      color: '#fff'
+    },
+    line: {
+      color: '#ff583e'
+    },
+    margin: {
+      l: 200,
+      r: 0,
+      b: 50,
+      t: 50,
+      pad: 4
+    },
+    mode: 'markers',
+    marker: {
+      size: 14,
+      color: '#fbb341'
+    },
+    paper_bgcolor: 'rgba(0, 0, 0, 0)',
+    plot_bgcolor: 'rgba(0, 0, 0, 0)'
+};
 
-  // var axis = d3.svg.axis()
-  var axis = d3.axisBottom()
-    .tickArguments(3) //specifies how many ticks on scale show up
-    .tickSize(10)
-    .scale(widthScale);
-
-  var canvas = d3.select(".current-country-data")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .append("g")
-    .attr("transform", "translate(20, 20)")
-    // .call(axis) // call the axis to render
-
-  var bars = canvas.selectAll("rect")
-    .data(dataArr)
-    .enter() //contains placeholders for each data point where there are non DOM elements (aka, returns 3 placeholders)
-    .append("rect")
-    .attr("width", function(d) { return widthScale(d); })
-    .attr("height", 30)
-    .attr("fill", function(d) { return color(d); })
-    .attr("y", function(d, i) { return i * 40; })
-
-  canvas.append("g")
-    .attr("transform", "translate(0, 160)")
-    .call(axis)
-  }
-
-
-
-
-
+  Plotly.newPlot("bar-graph", data, layout, {displayModeBar: false})
+}
 
 map.insert("path", ".graticule")
   .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))

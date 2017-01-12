@@ -10,6 +10,6 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 
-Rails.application.config.assets.precompile += %w( clickable_globe.js )
+Rails.application.config.assets.precompile += %w( plotly-latest.min.js clickable_globe.js )
 
 Rails.application.config.assets.precompile += %w( reset.css application.css app.css mixins.scss clickable_globe.css countries.css cities.css )
