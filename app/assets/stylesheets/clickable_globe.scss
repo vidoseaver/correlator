@@ -65,8 +65,11 @@ p#instructions {
 }
 
 #country_info_container {
-  @include containerDisplay;
-  margin: 0 0 0 20px;
+  // @include containerDisplay;
+  text-align: left;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
   flex-direction: column;
   // background-color: rgba(0, 0, 0, 0.8);
   background-color: rgba(0, 0, 0, 0.6);
@@ -74,10 +77,11 @@ p#instructions {
   width: 600px;
   height: 430px;
   padding: 20px;
+  overflow-y: scroll;
 }
 
 .current-country-data {
-  overflow-y: scroll;
+  // overflow-y: scroll;
   line-height: 22px;
   font-size: 16px;
 }
@@ -182,12 +186,19 @@ textarea#country-background {
   outline: none;
 }
 
-.bar-graph {
-  @include containerDisplay;
-  margin: auto;
-  width: 480px;
-  height: 400px;
-}
+// .bar-graph {
+//   @include containerDisplay;
+//   margin: auto;
+//   width: 480px;
+//   height: 400px;
+// }
+
+// div.svg-container {
+//   // background-color: black;
+//
+//   width: 480px;
+//   height: 400px;
+// }
 //
 // // .bar-graph {
 // //   stroke: white;

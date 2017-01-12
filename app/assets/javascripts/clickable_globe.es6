@@ -92,6 +92,7 @@ function renderWorld(world, names) {
             .attr("database-id", names[i].id)
             .on("click", function() {
               $(".current-country-data").text("")
+              $("#bar-graph").text("")
               var databaseCountryID = $(this).attr("database-id")
 
               $.ajax({
@@ -260,7 +261,36 @@ function renderCityData(cityData) {
     orientation: "h"
   }]
 
-  Plotly.newPlot("bar-graph", data)
+  var layout = {
+    title: 'Nomad Scores',
+    // margin: {t: 20},
+    width: 550,
+    height: 400,
+    font: {
+      family: 'Droid Sans, monospace',
+      size: 14,
+      color: '#fff'
+    },
+    line: {
+      color: '#ff583e'
+    },
+    margin: {
+      l: 200,
+      r: 0,
+      b: 50,
+      t: 50,
+      pad: 4
+    },
+    mode: 'markers',
+    marker: {
+      size: 14,
+      color: '#fbb341'
+    },
+    paper_bgcolor: 'rgba(0, 0, 0, 0)',
+    plot_bgcolor: 'rgba(0, 0, 0, 0)'
+};
+
+  Plotly.newPlot("bar-graph", data, layout, {displayModeBar: false})
 }
 
 map.insert("path", ".graticule")
