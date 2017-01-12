@@ -256,8 +256,8 @@ function renderCityData(cityData) {
 
   var data = [{
     type: "bar",
-    x: cityData.city_scores_arrayed,
-    y: cityData.names_arrayed,
+    x: cityData.city_scores_arrayed.reverse(),
+    y: cityData.names_arrayed.reverse(),
     orientation: "h"
   }]
 
