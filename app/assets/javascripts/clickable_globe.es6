@@ -263,7 +263,6 @@ function renderCityData(cityData) {
 
   var layout = {
     title: 'Nomad Scores',
-    // margin: {t: 20},
     width: 550,
     height: 400,
     font: {
