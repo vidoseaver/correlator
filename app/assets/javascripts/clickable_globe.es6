@@ -45,9 +45,9 @@ $(".current-country-data").append(`
   <section class="instructions-section">
     <h3 id="instructions-title">Click a Country to View Its Data</h3>
     <p id="instructions">
-      Once you've chosen a country, click on available cities. You will be able to view a Country's demographic information based on the <a href="https://www.cia.gov/library/publications/the-world-factbook/" target="_blank">CIA World Factbook.</a> Once you click on a country, you can view a respective city's "livability" ratings courtesty of <a href="https://nomadlist.com/" target="_blank">NomadList</a>.
+      Once you've chosen a country, click on available cities. You will be able to view a Country's demographic information based on the <a href="https://www.cia.gov/library/publications/the-world-factbook/" target="_blank">CIA World Factbook.</a> Once you click on a country, you can view a respective city's "livability" ratings courtesy of <a href="https://nomadlist.com/" target="_blank">NomadList</a>.
     </p>
-  </sectin>
+  </section>
 `)
 
 $.ajax({
@@ -111,7 +111,6 @@ function renderWorld(world, names) {
                 async: true,
                 dataType: "json",
                 success: function(clickedCountryCities) {
-                  console.log('clicked country ajax return data', clickedCountryCities)
                   renderCityDropDown(clickedCountryCities, databaseCountryID)
                 }
               })
@@ -208,9 +207,12 @@ function renderCountryData(clickedCountry, databaseCountryID) {
 
 function renderCityDropDown(clickedCountryCities, databaseCountryID) {
   $("#city-list").text("")
+  $(".select-box-placeholder").css("display", "none")
   var cityList = clickedCountryCities.map(function(city) {
     return (`<option value=${city.id}> ${city.name} </option>`)
   })
+  console.log('cityList', cityList);
+  if (cityList.length !== 0) {
     $("#city-list").append(`
       <div class="select-box">
         <select id="city-name-container">
@@ -219,7 +221,17 @@ function renderCityDropDown(clickedCountryCities, databaseCountryID) {
         </select>
       </div>
     `)
+  } else {
+    $("#city-list").append(`
+      <div class="select-box">
+        <select id="city-name-container">
+          <option value="default" selected>No Cities Available</option>
+          ${cityList}
+        </select>
+      </div>
+    `)
   }
+}
 
 $("#city-list").on('change', "#city-name-container", function() {
   var cityId = this.value;
@@ -233,7 +245,6 @@ function getCityData(cityId) {
     async: true,
     dataType: "json",
     success: function(cityData) {
-      console.log('clicked city ajax return data', cityData)
       renderCityData(cityData)
     }
   })

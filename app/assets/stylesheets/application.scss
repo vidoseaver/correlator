@@ -39,6 +39,10 @@
 
 h1#app-title {
   font-family: 'saxmono';
+  text-shadow: #959595 0 2px 0;
+  font-size: 70px;
+  margin: 60px auto 20px auto;
+  color: #121212;
 }
 
 .country-title-and-city {
@@ -65,18 +69,12 @@ article#city-list {
 /* The typing effect */
 @keyframes typing {
   from { width: 0 }
-  to { width: 350px }
+  to { width: 330px }
 }
 
 /* The typewriter cursor effect */
 @keyframes blink-caret {
   from, to { border-color: transparent }
-}
-
-#app-title {
-  font-size: 50px;
-  margin: 30px auto 20px auto;
-  color: #f2f2f2;
 }
 
 #country-name-title {
