@@ -61,14 +61,14 @@ p#instructions {
   align-items: center;
   justify-content: space-around;
   flex-direction: row;
-  margin: 20px 20px;
+  margin: 20px 20px 60px 20px;
 }
 
 #country_info_container {
   text-align: left;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
+  margin: 0 60px 0 20px;
   flex-direction: column;
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 20px;
@@ -184,6 +184,15 @@ textarea#country-background {
   margin: 10px auto;
   color: #e8e8e8;
   outline: none;
+}
+
+::selection {
+  background: #6b0000; /* WebKit/Blink Browsers */
+  line-height: 16px;
+}
+::-moz-selection {
+  background: #6b0000; /* Gecko Browsers */
+  line-height: 16px;
 }
 
 div.hidden {

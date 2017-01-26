@@ -13,8 +13,14 @@
   <header>
     <h1 id="app-title">World Data Correlator</h1>
     <section class="country-title-and-city">
-      <div id="country-name-title">Select a Country</div>
-      <article id="city-list"></article>
+      <div id="country-name-title">Click a Country</div>
+      <article id="city-list">
+        <div class="select-box select-box-placeholder">
+          <select id="city-name-container">
+            <option value="default" selected>Click a Country to View Cities</option>
+          </select>
+        </div>
+      </article>
     </section>
   </header>
 
