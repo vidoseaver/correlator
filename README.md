@@ -4,6 +4,8 @@ An application that provides an interactive clickable globe that can display dat
 
 built with Rails - with a POSTGRESQL database -, D3.js, JavaScript, and SCSS.
 
+[Live Version](http://corre1ator.herokuapp.com)
+
 ## Project Screen Shot(s)
 
 #### Example:   
