@@ -16,12 +16,13 @@ Built with Rails - with a POSTGRESQL database -, D3.js, JavaScript, and SCSS
 
 Clone down this repository. You will need Ruby and installed globally on your machine.  
 
-Installation:
+### Installation:
+
   In console enter
 
   `bundle`
 
-Then create and seed the database:
+### Then create and seed the database:
 
   In console enter:
 
@@ -29,14 +30,14 @@ Then create and seed the database:
 
   This will populate the countries from Cia World Factbook data stored locally.
 
-  Next, populate the cities curated from Nomadlist.com.
+### Next, populate the cities curated from Nomadlist.com.
     `rails console
     City.populate_cities
     exit`
 
   `bundle`
 
-Then create and seed the database:
+### Then create and seed the database:
 
   In console enter:
 
@@ -44,7 +45,7 @@ Then create and seed the database:
 
   This will populate the countries from Cia World Factbook data stored locally.
 
-  Next, populate the cities curated from Nomadlist.com.
+### Next, populate the cities curated from Nomadlist.com.
 
   ` rails console
     City.populate_cities
@@ -52,15 +53,15 @@ Then create and seed the database:
     
 ---
 
-To Start Server:
+### To Start Server:
 
 `rails s`  
 
-To Visit App:
+### To Visit App:
 
 `localhost:3000`  
 
-To Run Test Suite:  
+### To Run Test Suite:  
 
 `rspec`
 
