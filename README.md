@@ -1,26 +1,16 @@
 # World Data Correlator
-
----
-
-## [Live Version](http://corre1ator.herokuapp.com)
-
----
+statistics
+## Click to Navigate this digital globe to explore country demographics & guage city liveability on the [Live Version](http://corre1ator.herokuapp.com)
 
 An application that provides an interactive clickable globe that can display data about countries and cities relative to travelers. Once a user clicks on a country, they are able to view essential information from the [CIA World Factbook](https://www.cia.gov/library/publications/the-world-factbook/) and [NomadList](https://nomadlist.com/).
 
-built with Rails - with a POSTGRESQL database -, D3.js, JavaScript, and SCSS.
-
-## Project Screen Shot(s)
-
-#### Example:   
+built with Rails - with a POSTGRESQL database -, D3.js, JavaScript, and SCSS 
 
 ![screen shot 2017-01-11 at 9 28 49 pm](https://cloud.githubusercontent.com/assets/13802107/21877040/85a8349c-d845-11e6-9558-51618575f761.png)
 
 ![screen shot 2017-01-11 at 9 29 35 pm](https://cloud.githubusercontent.com/assets/13802107/21877041/88badb30-d845-11e6-97ed-b3bc6b50ea74.png)
 
-## Installation and Setup Instructions
-
-#### Example:  
+## Developer Enviornment | Installation and Setup Instructions
 
 Clone down this repository. You will need Ruby and installed globally on your machine.  
 
@@ -58,7 +48,7 @@ Then create and seed the database:
     City.populate_cities
     exit `
     
-    ---
+---
 
 To Start Server:
 
