@@ -1,10 +1,14 @@
 # World Data Correlator
 
+---
+
+## [Live Version](http://corre1ator.herokuapp.com)
+
+---
+
 An application that provides an interactive clickable globe that can display data about countries and cities relative to travelers. Once a user clicks on a country, they are able to view essential information from the [CIA World Factbook](https://www.cia.gov/library/publications/the-world-factbook/) and [NomadList](https://nomadlist.com/).
 
 built with Rails - with a POSTGRESQL database -, D3.js, JavaScript, and SCSS.
-
-[Live Version](http://corre1ator.herokuapp.com)
 
 ## Project Screen Shot(s)
 
