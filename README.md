@@ -1,6 +1,6 @@
 # World Data Correlator
 
-### Click to Navigate this digital globe to explore country demographics & guage city liveability on the [Live Version](http://corre1ator.herokuapp.com)
+### Click to countries to navigate the digital globe to explore country demographics & guage city liveability on the [Live Version](http://corre1ator.herokuapp.com)
 
 ---
 
