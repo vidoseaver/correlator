@@ -66,6 +66,10 @@ To Run Test Suite:
 
 ---
 
+[Original Assignment](http://frontend.turing.io/projects/self-directed-project.html)
+
+---
+
 ## Reflection
 
 #### Kinan's reflection:
